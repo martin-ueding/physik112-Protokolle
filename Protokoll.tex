@@ -59,7 +59,113 @@
 \section{vorbereitende Aufgaben}
 
 \subsection{Aufgabe 100.A}
+
+\begin{quote}
+Beweisen Sie, dass es für $a > 4f$ genau 2 Linsenstellungen mit scharfer Abbildung gibt. Welchen Abbildunsmaßstab hat man bei $a = 4f$?
+\end{quote}
+
+Es gilt
+
+\begin{equation}
+\label{GBgb}
+\frac{G}{B} = \frac{g}{b}.
+\end{equation}
+
+Betrachtet man den rechten Teil zwischen Linse und Bild, findet man dort ebenfalls zwei ähnliche Dreiecke. Aus dem Strahlensatz kann man ablesen:
+
+\begin{align*}
+\frac{f}{b-f} &= \frac{G}{B} \\
+%
+\intertext{Zusammen mit \eqref{GBgb} ergibt sich:}
+%
+\frac{f}{b-f} &= \frac{g}{b} \\
+bf &= bg-gf \\
+bf+gf &= bg \\
+f(b+g) &= bg \\
+%
+\intertext{Aus der Definition von $a = b + g$ folgt:}
+%
+fa &= bg \\
+f &= \frac{bg}{f} \\
+%
+\intertext{Erneute Anwendung der Definition $a = b + g$:}
+%
+f &= \frac{(a-g)g}{a} \\
+f &= \frac{ag-g^2}{a} \\
+f &= g - \frac{g^2}{a} \\
+%
+\intertext{Einsetzen der Bedingung $a > 4f$.}
+%
+f &= g - \frac{g^2}{a} < g - \frac{g^2}{4f} \\
+4f^2 &< 4fg - g^2 \\
+4f^2 - 4fg + g^2 &< 0 \\
+\left(f-\half g \right)^2 &< 0 \\
+\end{align*}
+
+Somit gibt es genau eine Lösung für die Brennweite für den Fall $a = 4f$.
+
+Bleiben die weiteren Fälle. Dafür wird die Banklänge in $a = r \cdot 4f$ angegeben.
+
+
+\begin{align*}
+f &< g - \frac{g^2}{4fr} \\
+4f^2r - 4fgr + g^2 &< 0 \\
+f^2 - fg + \frac{g^2}{4r} &< 0 \\
+f &= \half g \pm \sqrt{\frac{1}{4} g^2 - \frac{g^2}{4r}} \\
+f &= \half g \pm \half g \sqrt{1 - \frac{1}{r}} \\
+\end{align*}
+
+Damit es genau zwei Lösungen gibt, muss der Radikant positiv sein.
+
+\begin{align*}
+1 - \frac{1}{r} &> 0 \\
+1 &> \frac{1}{r} \\
+1 &< r \\
+\end{align*}
+
+$r$ muss also größer als 1 sein, damit es genau zwei Lösungen gibt. Für $a > 4f$ ist dies erfüllt, somit hat dieser Fall genau zwei Lösungen. Für eine Linse mit gegebener Brennweite gibt es also an zwei Stellen eine Position, wo diese Brennweite ein scharfes Bild erzeugt.
+
+
+Im Grenzfall ist $a = 4f$ und das $g$ eindeutig bestimmt. Da man jedoch $g$ und $b$ vertauschen darf, müssen diese gleich sein. Es folgt $g = b = 2f$. Somit ist $\frac{g}{b}$, der Abbildungsmaßstab, 1.
+
+
 \subsection{Aufgabe 100.B}
+
+\begin{quote}
+Leiten Sie mit dem Abstand der Linsenposition e (siehe Abb. 100.1) die folgende Gleichung her:
+
+\begin{equation}
+4f = a - e^2/a.
+\end{equation}
+\end{quote}
+
+Gegeben ist:
+
+\begin{equation}
+\label{fbg}
+\frac{1}{f} = \frac{1}{b} + \frac{1}{g}
+\end{equation}
+
+Aus der Skizze kann man für $g$ und $b$ ableiten:
+
+\begin{equation}
+g = a-b
+\end{equation}
+
+\begin{equation}
+b = \half (a-e)
+\end{equation}
+
+\begin{align*}
+\frac{1}{f} &= \frac{2}{a-e} + \frac{1}{a-b} \\
+\frac{1}{f} &= \frac{2}{a-e} + \frac{1}{a-\half (a-e)} \\
+\frac{1}{f} &= \frac{2}{a-e} + \frac{2}{2a-a+e} \\
+\frac{1}{f} &= \frac{2}{a-e} + \frac{2}{a+e} \\
+\frac{1}{f} &= \frac{2(a-e) + 2(a+e)}{a^2 - e^2} \\
+\frac{1}{f} &= \frac{4a}{a^2 - e^2} \\
+4f &= \frac{a^2 - e^2}{a} \\
+4f &= a - \frac{e^2}{a} \\
+\end{align*}
 
 \section{Versuch}
 
@@ -71,8 +177,10 @@
 
 \subsection{Auswertung}
 
-Zur Auswertung benutze ich folgedes Programm für GNU Octave.
+Zur Auswertung benutze das Programm für GNU Octave in Listing \ref{bessel.m}. Dessen Ausgabe ist in Listing \ref{bessel.m.out} zu sehen.
 
-\lstinputlisting[caption=bessel.m]{bessel.m}
+\lstinputlisting[caption=bessel.m, float=htbp, label=bessel.m]{bessel.m}
+
+\lstinputlisting[caption=Ausgabe von bessel.m, float=htbp, label=bessel.m.out]{bessel.m.out}
 
 \end{document}
