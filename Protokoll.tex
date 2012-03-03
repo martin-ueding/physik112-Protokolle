@@ -1,14 +1,13 @@
 % Copyright (c) 2012 Martin Ueding <dev@martin-ueding.de>
 %
-\documentclass[12pt]{article}
+\documentclass[11pt]{article}
 \usepackage[a4paper, left=3cm, right=2cm, top=2cm, bottom=2cm]{geometry}
 \usepackage[activate]{pdfcprot}
 \usepackage[ngerman]{babel}
 \usepackage[parfill]{parskip}
-\usepackage[utf8]{inputenc}
+\usepackage{xeCJK}
 \usepackage{amsmath}
 \usepackage{amssymb}
-\usepackage{listings}
 \usepackage{color}
 \usepackage{epstopdf}
 \usepackage{graphicx}
@@ -25,6 +24,30 @@
 \newcommand{\gqq}[1]{\glqq #1\grqq}
 \newcommand{\half}{\frac{1}{2}}
 \renewcommand{\d}{\, \mathrm d}
+
+% Format for listings
+\definecolor{darkblue}{rgb}{0,0,.5}
+\definecolor{gray}{rgb}{.3,.3,.3}
+\definecolor{lightblue}{rgb}{0.9,.9,1}
+\usepackage{listings}
+\usepackage{caption}
+\DeclareCaptionFont{white}{\color{white}}
+\DeclareCaptionFormat{listing}{\colorbox{gray}{\parbox{\textwidth-2\fboxsep}{#1#2#3}}}
+\captionsetup[lstlisting]{format=listing,labelfont=white,textfont=white, margin=0pt, font={bf,footnotesize}}
+\lstset{
+	breaklines=true,
+		showstringspaces=false,
+		framexleftmargin=0pt,
+		framexrightmargin=0pt,
+		framextopmargin=0pt,
+		framexbottommargin=0pt,
+		frame=b,
+		xleftmargin=0pt,
+		xrightmargin=0pt,
+		basicstyle=\small\ttfamily,
+		keywordstyle=\color{black}\bfseries,
+		tabsize=4
+}
 
 \title{physik111 Versuch 100 \\ Bessel-Verfahren}
 \author{Martin Ueding}
@@ -44,12 +67,12 @@
 
 \subsubsection*{Messung von $a$ und $\Delta a$}
 
-\lstinputlisting{measurement.dat}
+\lstinputlisting[caption=Messreihe]{measurement.dat}
 
 \subsection{Auswertung}
 
 Zur Auswertung benutze ich folgedes Programm für GNU Octave.
 
-\lstinputlisting{bessel.m}
+\lstinputlisting[caption=bessel.m]{bessel.m}
 
 \end{document}
