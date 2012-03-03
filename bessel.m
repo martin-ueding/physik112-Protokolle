@@ -8,7 +8,6 @@
 
 # Load data.
 load "measurement.dat"
-measurement
 
 # Count the number of measurements.
 N = length(measurement)
@@ -18,8 +17,8 @@ a = 10
 Da = 0.1
 
 # Extract the two data sets from the input.
-x1 = measurement(:, 1)
-x2 = measurement(:, 2)
+x1 = measurement(:, 1);
+x2 = measurement(:, 2);
 meanX1 = mean(x1)
 meanX2 = mean(x2)
 
@@ -51,8 +50,7 @@ endfunction
 
 DmeanF = sqrt((focalLengthPartialA(a, meanE) * De)**2 + (focalLengthPartialE(a, meanE) * Da)**2)
 
-printf("\n")
-printf("Final results:\n")
+printf("\nFinal results:\n")
 printf("a: %10f ± %10f\n", a, Da)
 printf("e: %10f ± %10f\n", meanE, De)
 printf("f: %10f ± %10f\n", meanF, DmeanF)
