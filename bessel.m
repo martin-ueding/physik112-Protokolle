@@ -1,6 +1,5 @@
 #!/usr/bin/octave -fq
 # Copyright © 2012 Martin Ueding <dev@martin-ueding.de>
-# vim: ft=octave
 
 # Measurement program for the ``physik111`` experiment ``100``.
 #
