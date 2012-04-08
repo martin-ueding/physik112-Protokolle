@@ -1,7 +1,7 @@
 #!/usr/bin/octave -fq
 # Copyright © 2012 Martin Ueding <dev@martin-ueding.de>
 
-# physik111 Experiment 117.
+# physik112 Experiment 117.
 
 ###############################################################################
 #                                  Messwerte                                  #
