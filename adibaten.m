@@ -8,8 +8,8 @@
 ###############################################################################
 
 # Dauer von n Perioden mit Schwingern 1 und 2 [s].
-periods1 = [60];
-periods2 = [60];
+T1_list = [60];
+T1_list = [60];
 
 # Anzahl der Perioden
 n = 50;
@@ -26,8 +26,8 @@ m2 = 7.1e-3;
 r = 5.95e-4;
 
 function k = exponent(m, V, T, r)
-	p = innendruck(m, r)
-	k = 4.0 * m * V / T**2 / r**4 / p
+	p = innendruck(m, r);
+	k = 4.0 * m * V / T**2 / r**4 / p;
 endfunction
 
 # Volumen des Glaskolbens [m**3].
@@ -42,7 +42,7 @@ global g = 9.81;
 function p = innendruck(m, r)
 	global p_L;
 	global g;
-	p = p_L + m * g / pi / r**2
+	p = p_L + m * g / pi / r**2;
 endfunction
 
 ###############################################################################
@@ -50,8 +50,8 @@ endfunction
 ###############################################################################
 
 # Gemittelte Periode einer einzelnen Schwingung [s].
-T1 = mean(periods1) / n
-T2 = mean(periods2) / n
+T1 = mean(T1_list) / n
+T2 = mean(T2_list) / n
 
 k1 = exponent(m1, V, T1, r)
 k2 = exponent(m2, V, T2, r)
