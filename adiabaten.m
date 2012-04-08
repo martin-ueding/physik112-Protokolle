@@ -25,6 +25,7 @@ n = 50;
 m1 = 4.5e-3;
 m2 = 7.1e-3;
 
+# Fehler der Massen [kg].
 Delta_m = 0.1e-3;
 
 # Radien der Schwinger [m].
@@ -42,6 +43,8 @@ V = 1.14e-3;
 
 # Luftdruck [Pa].
 global p_L = 1000e2;
+
+# Fehler des Luftdrucks [Pa].
 Delta_p_L = 0;
 
 # Ortsfaktor [N / kg].
