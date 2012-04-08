@@ -46,6 +46,7 @@ Delta_p_L = 0;
 # Ortsfaktor [N / kg].
 global g = 9.81;
 
+# Erwarteter Adiabatenkoeffizient.
 k_erwartet = 7/5
 
 ###############################################################################
