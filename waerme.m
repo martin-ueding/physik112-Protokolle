@@ -24,15 +24,19 @@ m_al = 100;
 m_brass = 100;
 m_cu = 100;
 
+Delta_m = 0;
+
 # Calorimeter temperature [°C].
 T_cal_al = 20;
 T_cal_brass = 20;
 T_cal_cu = 20;
+Delta_T_cal = 0;
 
 # Equilibrium temperature [°C].
 T_eq_al = 50;
 T_eq_brass = 50;
 T_eq_cu = 50;
+Delta_T_eq = 0;
 
 ###############################################################################
 #                                 Given Data                                  #
