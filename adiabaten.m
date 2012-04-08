@@ -46,6 +46,8 @@ Delta_p_L = 0;
 # Ortsfaktor [N / kg].
 global g = 9.81;
 
+k_erwartet = 7/5
+
 ###############################################################################
 #                                 Funktionen                                  #
 ###############################################################################
@@ -108,6 +110,8 @@ Delta_k2 = error_kn(m1, V, T2, r, p_L, Delta_m, Delta_T2, Delta_r, Delta_p_L)
 k = mean([k1 k2])
 Delta_k = qsum([Delta_k1 Delta_k2])
 
+k_abweichung = abs(k - k_erwartet) / k_erwartet
+
 ###############################################################################
 #                                 Ergebnisse                                  #
 ###############################################################################
@@ -120,3 +124,4 @@ printf("117.e: T2: %f ± %f s\n", T2, Delta_T2);
 printf("\n");
 
 printf("117.f: k: %f ± %f \n", k, Delta_k);
+printf("117.f: Abweichung k: %f \n", k_abweichung);
