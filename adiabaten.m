@@ -64,8 +64,8 @@ endfunction
 #                                 Rechnungen                                  #
 ###############################################################################
 
-T1_list = T1_list / n
-T2_list = T2_list / n
+T1_list = T1_list ./ n
+T2_list = T2_list ./ n
 
 # Gemittelte Periode einer einzelnen Schwingung [s].
 T1 = mean(T1_list)
