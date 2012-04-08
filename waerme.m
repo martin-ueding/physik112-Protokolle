@@ -95,15 +95,15 @@ c_al = C_al / m_al
 n_al = m_al / u_al
 cm_al = C_al / n_al
 
-C_cu = (T_eq_cu - T_cal_cu) / (T_boil - T_eq_cu)
-c_cu = C_cu / m_cu
-n_cu = m_cu / u_cu
-cm_cu = C_cu / n_cu
-
 C_brass = (T_eq_brass - T_cal_brass) / (T_boil - T_eq_brass)
 c_brass = C_brass / m_brass
 n_brass = m_brass / u_brass
 cm_brass = C_brass / n_brass
+
+C_cu = (T_eq_cu - T_cal_cu) / (T_boil - T_eq_cu)
+c_cu = C_cu / m_cu
+n_cu = m_cu / u_cu
+cm_cu = C_cu / n_cu
 
 # Deviations
 dev_al = abs(c_al - c_al_lit) / c_al_lit
