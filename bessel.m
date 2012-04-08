@@ -12,8 +12,8 @@ load "measurement.dat"
 N = length(measurement)
 
 # Length of the optical bank and its error.
-a = 10
-Da = 0.1
+a = 59.74
+Da = 0.07
 
 # Extract the two data sets from the input.
 x1 = measurement(:, 1);
@@ -40,11 +40,11 @@ De = Dx1**2 + Dx2**2
 
 # Calculating the error for meanF.
 function Df = focalLengthPartialE(a, e)
-	Df = -e / (2*a)
+	Df = -e / (2*a);
 endfunction
 
 function Df = focalLengthPartialA(a, e)
-	Df = 1/4*(1+e**2/a**2)
+	Df = 1/4*(1+e**2/a**2);
 endfunction
 
 DmeanF = sqrt((focalLengthPartialA(a, meanE) * De)**2 + (focalLengthPartialE(a, meanE) * Da)**2)
