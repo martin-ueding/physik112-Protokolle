@@ -1,7 +1,7 @@
 #!/usr/bin/octave -fq
 # Copyright © 2012 Martin Ueding <dev@martin-ueding.de>
 
-# Measurement program for the ``physik111`` experiment ``100``.
+# Measurement program for the ``physik112`` experiment ``100``.
 #
 # The focal length of a thin lens is measured using the Bessel method.
 
