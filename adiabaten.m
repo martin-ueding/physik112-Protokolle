@@ -64,6 +64,7 @@ endfunction
 #                                 Rechnungen                                  #
 ###############################################################################
 
+# Auf Periode pro einzelner Schwingung umrechnen.
 T1_list = T1_list ./ n
 T2_list = T2_list ./ n
 
@@ -83,13 +84,13 @@ function Delta_kn = error_kn(m, V, T, r, p_L, Delta_m, Delta_T, Delta_r, Delta_p
 	# Δm * dk/dm
 	part_m = Delta_m * ((4*V)/(r**4*T**2*((g*m)/(pi*r**2) + p_L)) - (4*g*m*V)/(pi*r**6*T**2*((g*m)/(pi*r**2) + p_L)^2))
 
-	# ΔT * dk/dm
+	# ΔT * dk/dT
 	part_T = Delta_T * (-((8*m*V)/((p_L + (g*m)/(pi*r**2))*r**4*T**3)))
 
-	# Δr * dk/dm
+	# Δr * dk/dr
 	part_r = Delta_r * ((8*g*m**2*V)/(pi*(p_L + (g*m)/(pi*r**2))**2*r**7*T**2) - (16*m*V)/((p_L + (g*m)/(pi*r**2))*r**5*T**2))
 
-	# Δp_L * dk/dm
+	# Δp_L * dk/dp_L
 	part_p_L = Delta_p_L * (-((4*m*V)/((p_L + (g*m)/(pi*r**2))**2*r**4*T**2)))
 
 	Delta_kn = qsum([part_m part_T part_r part_p_L])
