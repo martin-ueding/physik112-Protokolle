@@ -150,9 +150,9 @@ printf("117.a: C_cu:    %f ± %f J / K\n", C_cu, Delta_C_cu);
 
 printf("\n");
 
-printf("117.b: m_al:    %f g\n", m_al);
-printf("117.b: m_brass: %f g\n", m_brass);
-printf("117.b: m_cu:    %f g\n", m_cu);
+printf("117.b: m_al:    %f ± %f g\n", m_al, Delta_m);
+printf("117.b: m_brass: %f ± %f g\n", m_brass, Delta_m);
+printf("117.b: m_cu:    %f ± %f g\n", m_cu, Delta_m);
 
 printf("\n");
 
