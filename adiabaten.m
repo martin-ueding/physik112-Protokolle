@@ -56,8 +56,27 @@ function p = innendruck(m, r)
 	p = p_L + m * g / pi / r**2;
 endfunction
 
+# Quatratisches Summieren.
 function s = qsum(in)
 	s = sqrt(sumsq(in))
+endfunction
+
+# Fehlerfunktion für ein k.
+function Delta_kn = error_kn(m, V, T, r, p_L, Delta_m, Delta_T, Delta_r, Delta_p_L)
+	global g;
+	# Δm * dk/dm
+	part_m = Delta_m * ((4*V)/(r**4*T**2*((g*m)/(pi*r**2) + p_L)) - (4*g*m*V)/(pi*r**6*T**2*((g*m)/(pi*r**2) + p_L)^2))
+
+	# ΔT * dk/dT
+	part_T = Delta_T * (-((8*m*V)/((p_L + (g*m)/(pi*r**2))*r**4*T**3)))
+
+	# Δr * dk/dr
+	part_r = Delta_r * ((8*g*m**2*V)/(pi*(p_L + (g*m)/(pi*r**2))**2*r**7*T**2) - (16*m*V)/((p_L + (g*m)/(pi*r**2))*r**5*T**2))
+
+	# Δp_L * dk/dp_L
+	part_p_L = Delta_p_L * (-((4*m*V)/((p_L + (g*m)/(pi*r**2))**2*r**4*T**2)))
+
+	Delta_kn = qsum([part_m part_T part_r part_p_L])
 endfunction
 
 ###############################################################################
@@ -78,23 +97,6 @@ Delta_T2 = std(T2_list)
 
 k1 = exponent(m1, V, T1, r, innendruck(m1, r))
 k2 = exponent(m2, V, T2, r, innendruck(m2, r))
-
-function Delta_kn = error_kn(m, V, T, r, p_L, Delta_m, Delta_T, Delta_r, Delta_p_L)
-	global g;
-	# Δm * dk/dm
-	part_m = Delta_m * ((4*V)/(r**4*T**2*((g*m)/(pi*r**2) + p_L)) - (4*g*m*V)/(pi*r**6*T**2*((g*m)/(pi*r**2) + p_L)^2))
-
-	# ΔT * dk/dT
-	part_T = Delta_T * (-((8*m*V)/((p_L + (g*m)/(pi*r**2))*r**4*T**3)))
-
-	# Δr * dk/dr
-	part_r = Delta_r * ((8*g*m**2*V)/(pi*(p_L + (g*m)/(pi*r**2))**2*r**7*T**2) - (16*m*V)/((p_L + (g*m)/(pi*r**2))*r**5*T**2))
-
-	# Δp_L * dk/dp_L
-	part_p_L = Delta_p_L * (-((4*m*V)/((p_L + (g*m)/(pi*r**2))**2*r**4*T**2)))
-
-	Delta_kn = qsum([part_m part_T part_r part_p_L])
-endfunction
 
 Delta_k1 = error_kn(m1, V, T1, r, p_L, Delta_m, Delta_T1, Delta_r, Delta_p_L)
 Delta_k2 = error_kn(m1, V, T2, r, p_L, Delta_m, Delta_T2, Delta_r, Delta_p_L)
