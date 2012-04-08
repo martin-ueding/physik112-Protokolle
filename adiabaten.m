@@ -34,10 +34,6 @@ r = 5.95e-4;
 # Fehler der Radien [m].
 Delta_r = 0.05e-4;
 
-function k = exponent(m, V, T, r, p)
-	k = 4.0 * m * V / T**2 / r**4 / p;
-endfunction
-
 # Volumen des Glaskolbens [m**3].
 V = 1.14e-3;
 
@@ -49,6 +45,14 @@ Delta_p_L = 0;
 
 # Ortsfaktor [N / kg].
 global g = 9.81;
+
+###############################################################################
+#                                 Funktionen                                  #
+###############################################################################
+
+function k = exponent(m, V, T, r, p)
+	k = 4.0 * m * V / T**2 / r**4 / p;
+endfunction
 
 function p = innendruck(m, r)
 	global p_L;
