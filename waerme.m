@@ -81,7 +81,7 @@ torr_per_hPa = 0.75006375541921
 
 # Boil temp of water [Torr] -> [°C].
 function T = boil_temp(p)
-	T = 100 + 0.03687 * (p - 760) - 0.000022 * (p - 760)**2;
+	T = 100 + 0.03687 * (p - 760) - 0.000022 * (p - 760)^2;
 endfunction
 
 function Delta_T = error_boil_temp(p, Delta_p)
@@ -96,7 +96,7 @@ function Delta_C = delta_c(C_cal, T_eq, T_cal, T_boil, Delta_T, Delta_T_boil)
 	part_T_cal = Delta_T * C_cal*(-(1/(T_boil - T_eq)))
 
 	# ΔT_boil
-	part_T_boil = Delta_T_boil * (-((C_cal*(-T_cal + T_eq))/(T_boil - T_eq)**2))
+	part_T_boil = Delta_T_boil * (-((C_cal*(-T_cal + T_eq))/(T_boil - T_eq)^2))
 
 	Delta_C = sqrt(sumsq([part_T_eq part_T_cal part_T_boil]))
 endfunction
@@ -144,7 +144,7 @@ Delta_c_al = sqrt(sumsq([
 	# ΔC_al
 	Delta_C_al / m_al
 	# Δm
-	Delta_m * (- C_al/m_al**2)
+	Delta_m * (- C_al/m_al^2)
 ]))
 
 c_brass = C_brass / m_brass
@@ -152,7 +152,7 @@ Delta_c_brass = sqrt(sumsq([
 	# ΔC_al
 	Delta_C_brass / m_brass
 	# Δm
-	Delta_m * (- C_al/m_brass**2)
+	Delta_m * (- C_al/m_brass^2)
 ]))
 
 c_cu = C_cu / m_cu
@@ -160,7 +160,7 @@ Delta_c_cu = sqrt(sumsq([
 	# ΔC_al
 	Delta_C_cu / m_cu
 	# Δm
-	Delta_m * (- C_al/m_cu**2)
+	Delta_m * (- C_al/m_cu^2)
 ]))
 
 # Molar heat capacity.
