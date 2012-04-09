@@ -128,24 +128,50 @@ Delta_p = Delta_p_zero * p_zero * (-1 / h_0) * exp(-h / h_0)
 T_boil = boil_temp(p)
 Delta_T_boil = error_boil_temp(p, Delta_p)
 
+# Total heat capacity.
 C_al = C_cal * (T_eq_al - T_cal_al) / (T_boil - T_eq_al)
-c_al = C_al / m_al
-n_al = m_al / u_al
-cm_al = C_al / n_al
+Delta_C_al = delta_c(C_cal, T_eq_al, T_cal_al, T_boil, Delta_T, Delta_T_boil)
 
 C_brass = C_cal * (T_eq_brass - T_cal_brass) / (T_boil - T_eq_brass)
-c_brass = C_brass / m_brass
-n_brass = m_brass / u_brass
-cm_brass = C_brass / n_brass
+Delta_C_brass = delta_c(C_cal, T_eq_brass, T_cal_brass, T_boil, Delta_T, Delta_T_boil)
 
 C_cu = C_cal * (T_eq_cu - T_cal_cu) / (T_boil - T_eq_cu)
-c_cu = C_cu / m_cu
-n_cu = m_cu / u_cu
-cm_cu = C_cu / n_cu
-
-Delta_C_al = delta_c(C_cal, T_eq_al, T_cal_al, T_boil, Delta_T, Delta_T_boil)
-Delta_C_brass = delta_c(C_cal, T_eq_brass, T_cal_brass, T_boil, Delta_T, Delta_T_boil)
 Delta_C_cu = delta_c(C_cal, T_eq_cu, T_cal_cu, T_boil, Delta_T, Delta_T_boil)
+
+# Specific heat capacity.
+c_al = C_al / m_al
+Delta_c_al = sqrt(sumsq([
+	# ΔC_al
+	Delta_C_al / m_al
+	# Δm
+	Delta_m * (- C_al/m_al**2)
+]))
+
+c_brass = C_brass / m_brass
+Delta_c_brass = sqrt(sumsq([
+	# ΔC_al
+	Delta_C_brass / m_brass
+	# Δm
+	Delta_m * (- C_al/m_brass**2)
+]))
+
+c_cu = C_cu / m_cu
+Delta_c_cu = sqrt(sumsq([
+	# ΔC_al
+	Delta_C_cu / m_cu
+	# Δm
+	Delta_m * (- C_al/m_cu**2)
+]))
+
+# Molar heat capacity.
+cm_al = c_al * u_al
+Delta_cm_al = Delta_c_al * u_al
+
+cm_brass = c_brass * u_brass
+Delta_cm_brass = Delta_c_brass * u_al
+
+cm_cu = c_cu * u_cu
+Delta_cm_cu = Delta_c_cu * u_al
 
 # Deviations
 dev_al = abs(c_al - c_al_lit) / c_al_lit
@@ -174,18 +200,18 @@ printf("117.b: m_cu:    %f ± %f g\n", m_cu, Delta_m);
 
 printf("\n");
 
-printf("117.c: c_al:    %f J g / K\n", c_al);
-printf("117.c: c_brass: %f J g / K\n", c_brass);
-printf("117.c: c_cu:    %f J g / K\n", c_cu);
+printf("117.c: c_al:    %f ± %f J g / K\n", c_al, Delta_c_al);
+printf("117.c: c_brass: %f ± %f J g / K\n", c_brass, Delta_c_brass);
+printf("117.c: c_cu:    %f ± %f J g / K\n", c_cu, Delta_c_cu);
 printf("117.c: Deviation for al:    %f\n", dev_al);
 printf("117.c: Deviation for brass: %f\n", dev_brass);
 printf("117.c: Deviation for cu:    %f\n", dev_cu);
 
 printf("\n");
 
-printf("117.d: cm_al:    %f J mol / K\n", cm_al);
-printf("117.d: cm_brass: %f J mol / K\n", cm_brass);
-printf("117.d: cm_cu:    %f J mol / K\n", cm_cu);
+printf("117.d: cm_al:    %f ± %f J mol / K\n", cm_al, Delta_cm_al);
+printf("117.d: cm_brass: %f ± %f J mol / K\n", cm_brass, Delta_cm_brass);
+printf("117.d: cm_cu:    %f ± %f J mol / K\n", cm_cu, Delta_cm_cu);
 printf("117.d: Deviation for al:    %f\n", dev_cm_al);
 printf("117.d: Deviation for brass: %f\n", dev_cm_brass);
 printf("117.d: Deviation for cu:    %f\n", dev_cm_cu);
