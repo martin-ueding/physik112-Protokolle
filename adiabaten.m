@@ -11,9 +11,6 @@
 T1_list = [25];
 T2_list = [25];
 
-# Fehler bei der Zeitmessung [s].
-Delta_T = 0.1;
-
 # Anzahl der Perioden
 n = 50;
 
@@ -96,7 +93,6 @@ T2_list = T2_list ./ n
 
 # Gemittelte Periode einer einzelnen Schwingung [s].
 T1 = mean(T1_list)
-# TODO Muss man hier noch Delta_T rein?
 Delta_T1 = std(T1_list)
 T2 = mean(T2_list)
 Delta_T2 = std(T2_list)
