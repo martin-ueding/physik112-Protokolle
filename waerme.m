@@ -9,9 +9,11 @@
 
 # Pressure in the lab with respect to zero height [Torr].
 p_zero = 700;
+Delta_p_zero = 0;
 
 # Height of the lab [m].
 h = 65;
+Delta_h = 0;
 
 # Mass of the water [g].
 m_water = 200;
@@ -50,20 +52,28 @@ c_al_lit = 0.897;
 c_cu_lit = 0.385;
 c_zn_lit = 0.387;
 
-u_al = 40;
-u_cu = 40;
-u_zn = 40;
-
 # Source: https://en.wikipedia.org/wiki/Heat_capacity
+
+u_al = 26.9815386;
+u_cu = 63.546;
+u_zn = 118.710;
+
+# Source: Wolfram|Alpha
 
 # Height scale for barometric formula [m].
 h_0 = 8400e3;
 
+# Source: Gerthsen Physik 24
+
 # Theoretical value of 3*R [J / mol K].
 dulong_petit = 24.9;
 
+# Source: Wikipedia
+
 # Conversion [Torr] -> [hPa].
 torr_per_hPa = 0.75006375541921
+
+# Source: http://www.unitjuggler.com/pressure-umwandeln-von-hPa-nach-Torr.html
 
 ###############################################################################
 #                                  Functions                                  #
@@ -74,14 +84,21 @@ function T = boil_temp(p)
 	T = 100 + 0.03687 * (p - 760) - 0.000022 * (p - 760)**2;
 endfunction
 
-function Delta_C = delta_c(T_eq, T_cal, T_boil, Delta_T)
+function Delta_T = error_boil_temp(p, Delta_p)
+	Delta_T = Delta_p * (0.03687 - 0.000044 * (-760 + p));
+endfunction
+
+function Delta_C = delta_c(C_cal, T_eq, T_cal, T_boil, Delta_T, Delta_T_boil)
 	# ΔT_eq
-	part_T_eq = Delta_T * (1/(T_boil - T_eq) + (-T_cal + T_eq)/(T_boil - T_eq)^2)
+	part_T_eq = Delta_T * C_cal*(1/(T_boil - T_eq) + (-T_cal + T_eq)/(T_boil - T_eq)^2)
 
 	# ΔT_cal
-	part_T_cal = Delta_T * (-(1/(T_boil - T_eq)))
+	part_T_cal = Delta_T * C_cal*(-(1/(T_boil - T_eq)))
 
-	Delta_C = sqrt(sumsq([part_T_eq part_T_cal]))
+	# ΔT_boil
+	part_T_boil = Delta_T_boil * (-((C_cal*(-T_cal + T_eq))/(T_boil - T_eq)**2))
+
+	Delta_C = sqrt(sumsq([part_T_eq part_T_cal part_T_boil]))
 endfunction
 
 ###############################################################################
@@ -94,40 +111,41 @@ u_brass = u_cu * .63 + u_zn * .37
 
 # Heat coefficient of the cup.
 C_cup = c_brass_lit * m_cup
-
 Delta_C_cup = Delta_m * c_brass_lit
 
 # Heat coefficient of the total calorimeter
 C_water = c_water_lit * m_water
-C_cal = C_cup + C_water
-
 Delta_C_water = Delta_m * c_water_lit
+
+C_cal = C_cup + C_water
 Delta_C_cal = sqrt(sumsq([Delta_C_cup Delta_C_water]))
 
 # Calculate pressure to the given height.
 p = p_zero * exp(-h / h_0)
+Delta_p = Delta_p_zero * p_zero * (-1 / h_0) * exp(-h / h_0)
 
 # Calculate boiling temperature at given pressure.
 T_boil = boil_temp(p)
+Delta_T_boil = error_boil_temp(p, Delta_p)
 
-C_al = (T_eq_al - T_cal_al) / (T_boil - T_eq_al)
+C_al = C_cal * (T_eq_al - T_cal_al) / (T_boil - T_eq_al)
 c_al = C_al / m_al
 n_al = m_al / u_al
 cm_al = C_al / n_al
 
-C_brass = (T_eq_brass - T_cal_brass) / (T_boil - T_eq_brass)
+C_brass = C_cal * (T_eq_brass - T_cal_brass) / (T_boil - T_eq_brass)
 c_brass = C_brass / m_brass
 n_brass = m_brass / u_brass
 cm_brass = C_brass / n_brass
 
-C_cu = (T_eq_cu - T_cal_cu) / (T_boil - T_eq_cu)
+C_cu = C_cal * (T_eq_cu - T_cal_cu) / (T_boil - T_eq_cu)
 c_cu = C_cu / m_cu
 n_cu = m_cu / u_cu
 cm_cu = C_cu / n_cu
 
-Delta_C_al = delta_c(T_eq_al, T_cal_al, T_boil, Delta_T)
-Delta_C_brass = delta_c(T_eq_brass, T_cal_brass, T_boil, Delta_T)
-Delta_C_cu = delta_c(T_eq_cu, T_cal_cu, T_boil, Delta_T)
+Delta_C_al = delta_c(C_cal, T_eq_al, T_cal_al, T_boil, Delta_T, Delta_T_boil)
+Delta_C_brass = delta_c(C_cal, T_eq_brass, T_cal_brass, T_boil, Delta_T, Delta_T_boil)
+Delta_C_cu = delta_c(C_cal, T_eq_cu, T_cal_cu, T_boil, Delta_T, Delta_T_boil)
 
 # Deviations
 dev_al = abs(c_al - c_al_lit) / c_al_lit
