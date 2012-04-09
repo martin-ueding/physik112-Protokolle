@@ -8,8 +8,8 @@
 ###############################################################################
 
 # Dauer von n Perioden mit Schwingern 1 und 2 [s].
-T1_list = [60 59];
-T2_list = [60 59];
+T1_list = [25];
+T2_list = [25];
 
 # Fehler bei der Zeitmessung [s].
 Delta_T = 0.1;
@@ -22,17 +22,17 @@ n = 50;
 ###############################################################################
 
 # Masse der Schwinger [kg].
-m1 = 4.5e-3;
+m1 = 9.4e-3;
 m2 = 7.1e-3;
 
 # Fehler der Massen [kg].
 Delta_m = 0.1e-3;
 
 # Radien der Schwinger [m].
-r = 5.95e-4;
+r = 5.95e-3;
 
 # Fehler der Radien [m].
-Delta_r = 0.05e-4;
+Delta_r = 0.05e-3;
 
 # Volumen des Glaskolbens [m**3].
 V = 1.14e-3;
