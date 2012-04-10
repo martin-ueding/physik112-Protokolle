@@ -93,9 +93,9 @@ T2_list = T2_list ./ n
 
 # Gemittelte Periode einer einzelnen Schwingung [s].
 T1 = mean(T1_list)
-Delta_T1 = std(T1_list)
+Delta_T1 = std(T1_list) / sqrt(length(T1_list))
 T2 = mean(T2_list)
-Delta_T2 = std(T2_list)
+Delta_T2 = std(T2_list) / sqrt(length(T2_list))
 
 k1 = exponent(m1, V, T1, r, innendruck(m1, r))
 Delta_k1 = error_kn(m1, V, T1, r, p_L, Delta_m, Delta_T1, Delta_r, Delta_p_L)
