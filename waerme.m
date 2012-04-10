@@ -7,36 +7,36 @@
 #                                Measurements                                 #
 ###############################################################################
 
-# Pressure in the lab with respect to zero height [Torr].
-p_zero = 700;
+# Pressure in the lab with respect to zero height [hPa].
+p_zero = 995;
 Delta_p_zero = 0;
 
 # Height of the lab [m].
 h = 65;
 Delta_h = 0;
 
-# Mass of the water [g].
-m_water = 200;
-
 # Mass of the cup [g].
-m_cup = 300;
+m_cup = 90;
+
+# Mass of the water [g].
+m_water = 196 - m_cup
 
 # Mass of the objects [g].
-m_al = 100;
-m_brass = 100;
-m_cu = 100;
+m_al = 155;
+m_brass = 478;
+m_cu = 505;
 
 Delta_m = 1;
 
 # Calorimeter temperature [°C].
-T_cal_al = 20;
-T_cal_brass = 20;
-T_cal_cu = 20;
+T_cal_al = 20.2;
+T_cal_brass = 22.0;
+T_cal_cu = 20.5;
 
 # Equilibrium temperature [°C].
-T_eq_al = 50;
-T_eq_brass = 50;
-T_eq_cu = 50;
+T_eq_al = 34.5;
+T_eq_brass = 39.3;
+T_eq_cu = 39.2;
 
 Delta_T = 1;
 
@@ -78,6 +78,8 @@ torr_per_hPa = 0.75006375541921
 ###############################################################################
 #                                  Functions                                  #
 ###############################################################################
+
+p_zero = p_zero * torr_per_hPa
 
 # Boil temp of water [Torr] -> [°C].
 function T = boil_temp(p)
@@ -121,7 +123,7 @@ C_cal = C_cup + C_water
 Delta_C_cal = sqrt(sumsq([Delta_C_cup Delta_C_water]))
 
 # Calculate pressure to the given height.
-p = p_zero * exp(-h / h_0)
+p = p_zero #* exp(-h / h_0)
 Delta_p = Delta_p_zero * p_zero * (-1 / h_0) * exp(-h / h_0)
 
 # Calculate boiling temperature at given pressure.
