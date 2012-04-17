@@ -18,7 +18,10 @@ set grid
 set title "physik111 Versuch 108: Aufgabe 108.b"
 
 # Plot the data with the fit.
-plot "108b_25.dat" title "25 g", "108b_50.dat" title "50 g"
+plot "108b_25_25.dat" title "25 g, 2.5 cm", \
+	 "108b_25_100.dat" title "25 g, 10 cm", \
+	 "108b_50_25.dat" title "50 g, 2.5 cm", \
+	 "108b_50_100.dat" title "50 g, 10 cm"
 
 # Set the output again so that the PDF is really written to.
 set output

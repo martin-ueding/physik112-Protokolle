@@ -28,27 +28,39 @@ omega = 2 * pi ./ perioden
 #                             Energiesatz Methode                             #
 ###############################################################################
 
-x_list_25 = []
-y_list_25 = []
-
-x_list_50 = []
-y_list_50 = []
+list_25_25 = []
+list_25_100 = []
+list_50_25 = []
+list_50_100 = []
 
 for n = 1:length(massen)
 	x = hoehen(n)
 	y = omega(n) ** 2
+
+	p = [x, y]
 	
 	if (massen(n) == 25)
-		x_list_25 = [x_list_25 ; x]
-		y_list_25 = [y_list_25 ; y]
+		if (radien(n) == 10)
+			list_25_100 = [list_25_100 ; p]
+		else
+			list_25_25 = [list_25_25 ; p]
+		endif
 	else
-		x_list_50 = [x_list_50 ; x]
-		y_list_50 = [y_list_50 ; y]
+		if (radien(n) == 10)
+			list_50_100 = [list_50_100 ; p]
+		else
+			list_50_25 = [list_50_25 ; p]
+		endif
 	endif
 endfor
 
-plot_data_25 = [x_list_25 y_list_25]
-plot_data_50 = [x_list_50 y_list_50]
+save "108b_25_25.dat" list_25_25
+save "108b_25_100.dat" list_25_100
+save "108b_50_100.dat" list_50_100
+save "108b_50_25.dat" list_50_25
 
-save "108b_25.dat" plot_data_25
-save "108b_50.dat" plot_data_50
+###############################################################################
+#                            Drehmomensatz Methode                            #
+###############################################################################
+
+
