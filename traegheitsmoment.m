@@ -149,11 +149,11 @@ epsilon_I_drehmoment = (I_drehmoment - I_theo) / I_theo;
 
 printf("\n");
 
-printf("108.b: I = %f ± %f\n", I_energie, Delta_I_energie);
+printf("108.b: I = %f ± %f kg m^2\n", I_energie, Delta_I_energie);
 
 printf("\n");
 
-printf("108.c: I = %f ± %f\n", I_drehmoment, Delta_I_drehmoment);
+printf("108.c: I = %f ± %f kg m^2\n", I_drehmoment, Delta_I_drehmoment);
 
 printf("\n");
 
