@@ -42,7 +42,7 @@ list_50_25 = [];
 list_50_100 = [];
 
 for n = 1:length(massen)
-	x = omega(n) ** 2;
+	x = omega(n)^2;
 	y = hoehen(n);
 
 	p = [x, y];
