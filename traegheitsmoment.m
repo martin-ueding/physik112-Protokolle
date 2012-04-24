@@ -80,7 +80,7 @@ function result = handleB(list, m, r)
 	result = [I];
 endfunction
 
-I_list = [ handleB(list_25_100, .025, 1) handleB(list_25_25, .025, .25) handleB(list_50_100, .050, 1) handleB(list_50_25, .050, .25) ];
+I_list = [ handleB(list_25_100, .025, .1) handleB(list_25_25, .025, .025) handleB(list_50_100, .05, .1) handleB(list_50_25, .050, .025) ];
 
 I_energie = mean(I_list);
 Delta_I_energie = std(I_list) / sqrt(length(I_list));
@@ -136,7 +136,7 @@ function result = handleC(list, m, r)
 	result = [I];
 endfunction
 
-I_drehmoment_list = [ handleC(list_25_100, .025, 1) handleC(list_25_25, .025, .25) handleC(list_50_100, .050, 1) handleC(list_50_25, .050, .25) ];
+I_drehmoment_list = [ handleC(list_25_100, .025, .1) handleC(list_25_25, .025, .025) handleC(list_50_100, .050, .1) handleC(list_50_25, .050, .025) ];
 
 I_drehmoment = mean(I_drehmoment_list);
 Delta_I_drehmoment = std(I_drehmoment_list) / sqrt(length(I_drehmoment_list));
