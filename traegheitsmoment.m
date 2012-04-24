@@ -43,7 +43,7 @@ list_50_100 = [];
 
 for n = 1:length(massen)
 	x = omega(n)^2;
-	y = hoehen(n);
+	y = hoehen(n) / 100;
 
 	p = [x, y];
 	
