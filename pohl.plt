@@ -13,9 +13,7 @@ set output "|epstopdf --filter > plot_c.pdf"
 
 # Label the axes.
 set xlabel "Periodennummer"
-set ylabel "phi"
-
-set logscale y
+set ylabel "ln(phi)"
 
 # Enable the grid.
 set grid
@@ -23,14 +21,11 @@ set grid
 # Set the title of the whole graph.
 set title "physik111 Versuch 106: Aufgabe 106.c"
 
-c = 1
-d = 1
+f1(x) = a * x + b;
+f3(x) = c * x + d;
+f5(x) = e * x + f;
 
-f1(x) = a * exp(x*g);
-f3(x) = c * exp(x*d);
-f5(x) = e * exp(x*f);
-
-fit f1(x) "c_1.dat" using 1:2 via a,g
+fit f1(x) "c_1.dat" using 1:2 via a,b
 fit f3(x) "c_3.dat" using 1:2 via c,d
 fit f5(x) "c_5.dat" using 1:2 via e,f
 
@@ -57,8 +52,6 @@ set output "|epstopdf --filter > plot_d.pdf"
 set xlabel "Spannung"
 set ylabel "Frequenz"
 
-unset logscale y
-
 # Enable the grid.
 set grid
 
@@ -82,8 +75,6 @@ set output "|epstopdf --filter > plot_e.pdf"
 # Label the axes.
 set xlabel "Anregungsfrequenz [1/Hz]"
 set ylabel "Pendelamplitude"
-
-unset logscale y
 
 # Enable the grid.
 set grid
