@@ -193,32 +193,32 @@ stahl1.laenge = laenge;
 pvc.laenge = laenge;
 gfk.laenge = laenge;
 
-function material = moment_rechteck(material)
-	material.moment.val = material.breite.val * material.dicke.val^3 / 12;
-	material.moment.err = sqrt(
+function material = I_rechteck(material)
+	material.I.val = material.breite.val * material.dicke.val^3 / 12;
+	material.I.err = sqrt(
 		(material.dicke.val^3 / 12 * material.breite.err)^2
 		+ (material.dicke.val * material.dicke.val^2 / 4 * material.dicke.err)^2
 	);
 endfunction
 
-function material = moment_kreis(material)
-	material.moment.val = 1/4 * pi * material.radius.val^4;
-	material.moment.err = abs(pi * material.radius.val^3 * material.radius.err);
+function material = I_kreis(material)
+	material.I.val = 1/4 * pi * material.radius.val^4;
+	material.I.err = abs(pi * material.radius.val^3 * material.radius.err);
 endfunction
 
-alu = moment_rechteck(alu);
-kupfer = moment_rechteck(kupfer);
-stahl1 = moment_rechteck(stahl1);
-pvc = moment_rechteck(pvc);
-gfk = moment_rechteck(gfk);
+alu = I_rechteck(alu);
+kupfer = I_rechteck(kupfer);
+stahl1 = I_rechteck(stahl1);
+pvc = I_rechteck(pvc);
+gfk = I_rechteck(gfk);
 
 printf("Flächenträgheitsmomente\n");
 printf("\n")
-printf("Aluminium: I = %f ± %f m^4\n", alu.moment.val, alu.moment.err);
-printf("Kupfer:    I = %f ± %f m^4\n", kupfer.moment.val, kupfer.moment.err);
-printf("Stahl:     I = %f ± %f m^4\n", stahl1.moment.val, stahl1.moment.err);
-printf("PVC:       I = %f ± %f m^4\n", pvc.moment.val, pvc.moment.err);
-printf("GFK:       I = %f ± %f m^4\n", gfk.moment.val, gfk.moment.err);
+printf("Aluminium: I = %f ± %f m^4\n", alu.I.val, alu.I.err);
+printf("Kupfer:    I = %f ± %f m^4\n", kupfer.I.val, kupfer.I.err);
+printf("Stahl:     I = %f ± %f m^4\n", stahl1.I.val, stahl1.I.err);
+printf("PVC:       I = %f ± %f m^4\n", pvc.I.val, pvc.I.err);
+printf("GFK:       I = %f ± %f m^4\n", gfk.I.val, gfk.I.err);
 printf("\n")
 
 ###############################################################################
@@ -261,11 +261,11 @@ stahl1.mu.err = 1;
 
 # Elastizitätsmodul ausrechnen.
 function mat = elast(mat)
-	mat.E.val = mat.laenge.val^3 / (mat.mu.val * mat.moment.val);
+	mat.E.val = mat.laenge.val^3 / (mat.mu.val * mat.I.val);
 	mat.E.err = sqrt(
-		(3 * mat.laenge.val^2 / (mat.mu.val * mat.moment.val) * mat.laenge.err)^2
-		+ (mat.laenge.val^3 / (mat.mu.val^2 * mat.moment.val) * mat.mu.err)^2
-		+ (mat.laenge.val^3 / (mat.mu.val * mat.moment.val^2) * mat.moment.err)^2
+		(3 * mat.laenge.val^2 / (mat.mu.val * mat.I.val) * mat.laenge.err)^2
+		+ (mat.laenge.val^3 / (mat.mu.val^2 * mat.I.val) * mat.mu.err)^2
+		+ (mat.laenge.val^3 / (mat.mu.val * mat.I.val^2) * mat.I.err)^2
 	);
 endfunction
 
@@ -316,8 +316,8 @@ gfk.F.err = 1;
 ###############################################################################
 
 function mat = elast2(mat)
-	mat.E.val = mat.laenge.val^2 / (mat.moment.val * pi^2) * mat.F.val;
+	mat.E.val = mat.laenge.val^2 / (mat.I.val * pi^2) * mat.F.val;
 	mat.E.err = sqrt(
-		(2 * mat.laenge.val / (mat.moment.val * pi^2) * mat.F.val * mat.laenge.err)^2
+		(2 * mat.laenge.val / (mat.I.val * pi^2) * mat.F.val * mat.laenge.err)^2
 	);
 endfunction
