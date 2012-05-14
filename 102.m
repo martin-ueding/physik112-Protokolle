@@ -1,6 +1,8 @@
 #!/usr/bin/octave -fq
 # Copyright © 2012 Martin Ueding <dev@martin-ueding.de>
 
+# Versuch 102
+
 ###############################################################################
 #                                  Messungen                                  #
 #                                 Abmessungen                                 #
@@ -99,7 +101,7 @@ gfk.knickung.val = [
    0.722620   0.717131
    0.515478   0.933349
    0.848369   0.065128
-]
+];
 
 ###############################################################################
 #                                  Messungen                                  #
@@ -155,7 +157,7 @@ stahl3.durchmesser.err = 1;
 
 ###############################################################################
 #                                 Rechnungen                                  #
-#                                Durchbiegung                                 #
+#                           Flächenträgheitsmomente                           #
 ###############################################################################
 
 alu.breite.err = laenge.err;
@@ -172,3 +174,30 @@ pvc.dicke.err = laenge.err;
 
 gfk.breite.err = laenge.err;
 gfk.dicke.err = laenge.err;
+
+function material = moment_rechteck(material)
+	material.moment.val = material.breite.val * material.dicke.val^3 / 12;
+	material.moment.err = sqrt(
+		(material.dicke.val^3 / 12 * material.breite.err)^2
+		+ (material.dicke.val * material.dicke.val^2 / 4 * material.dicke.err)^2
+	);
+endfunction
+
+function material = moment_kreis(material)
+	material.moment.val = 1/4 * pi * material.radius.val^4;
+	material.moment.err = abs(pi * material.radius.val^3 * material.radius.err);
+endfunction
+
+alu = moment_rechteck(alu);
+kupfer = moment_rechteck(kupfer);
+stahl1 = moment_rechteck(stahl1);
+pvc = moment_rechteck(pvc);
+gfk = moment_rechteck(gfk);
+
+printf("Flächenträgheitsmomente\n");
+printf("\n")
+printf("Aluminium: I = %f ± %f m^4\n", alu.moment.val, alu.moment.err);
+printf("Kupfer:    I = %f ± %f m^4\n", kupfer.moment.val, kupfer.moment.err);
+printf("Stahl:     I = %f ± %f m^4\n", stahl1.moment.val, stahl1.moment.err);
+printf("PVC:       I = %f ± %f m^4\n", pvc.moment.val, pvc.moment.err);
+printf("GFK:       I = %f ± %f m^4\n", gfk.moment.val, gfk.moment.err);
