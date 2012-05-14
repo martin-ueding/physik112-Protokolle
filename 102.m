@@ -147,6 +147,12 @@ stahl3.schwingung = [
 	0		15		1
 ];
 
+# Der Durchmesser des Stahldrahtes [m].
+stahl3.durchmesser.val = 1;
+
+# Und der passende Fehler [m].
+stahl3.durchmesser.err = 1;
+
 ###############################################################################
 #                                 Rechnungen                                  #
 #                                Durchbiegung                                 #
