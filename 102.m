@@ -319,5 +319,18 @@ function mat = elast2(mat)
 	mat.E.val = mat.laenge.val^2 / (mat.I.val * pi^2) * mat.F.val;
 	mat.E.err = sqrt(
 		(2 * mat.laenge.val / (mat.I.val * pi^2) * mat.F.val * mat.laenge.err)^2
+		+ (mat.laenge.val^2 / (mat.I.val^2 * pi^2) * mat.F.val * mat.I.err)^2
+		+ (mat.laenge.val^2 / (mat.I.val * pi^2) * mat.F.err)^2
 	);
 endfunction
+
+stahl2 = elast2(stahl2);
+pvc = elast2(pvc);
+gfk = elast2(gfk);
+
+printf("Elastizitätsmodule\n")
+printf("\n")
+printf("Stahl: E = %f ± %f\n", stahl2.E.val, stahl2.E.err);
+printf("PVC: E = %f ± %f\n", pvc.E.val, pvc.E.err);
+printf("PVC: E = %f ± %f\n", gfk.E.val, gfk.E.err);
+printf("\n")
