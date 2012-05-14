@@ -1,6 +1,6 @@
 #!/usr/bin/octave -fq
 # Copyright © 2012 Martin Ueding <dev@martin-ueding.de>
-# Änderungen Simon Schlepphorst
+# Änderungen © 2012 Simon Schlepphorst
 
 # physik112 Experiment 117.
 
@@ -92,7 +92,7 @@ function Delta_T = error_boil_temp(p, Delta_p)
 endfunction
 
 function Delta_C = delta_c(C_cal, Delta_C_cal, T_eq, T_cal, T_boil, Delta_T, Delta_T_boil)
-	# Î"C_cal
+	# ΔC_cal
 	part_C_cal = Delta_C_cal*((T_eq - T_cal)/(T_boil - T_eq))
 
 	# ΔT_eq
