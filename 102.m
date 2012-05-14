@@ -27,7 +27,11 @@ gfk.dicke.val = 1;
 
 # Fehler für Breite und Dickenmessung [m]. Dieser wird später auf alle diese
 # Größen draufgerechnet.
-laenge.err = 0.001;
+breite.err = 0.001;
+
+# Länge der Stäbe, wie in der Versuchsanleitung [m]
+laenge.val = 400e-3;
+laenge.err = 0.5e-3;
 
 ###############################################################################
 #                                  Messungen                                  #
@@ -66,6 +70,10 @@ stahl1.durchbiegung.val = [
    0.59792   0.36683
    0.74274   0.39041
 ];
+
+
+# Fehler in den Durchbiegungen [m].
+durchbiegung.err = 0.1;
 
 ###############################################################################
 #                                  Messungen                                  #
@@ -160,20 +168,28 @@ stahl3.durchmesser.err = 1;
 #                           Flächenträgheitsmomente                           #
 ###############################################################################
 
-alu.breite.err = laenge.err;
-alu.dicke.err = laenge.err;
+# Die Fehler in der Breite und Dicke zuweisen.
+alu.breite.err = breite.err;
+alu.dicke.err = breite.err;
 
-kupfer.breite.err = laenge.err;
-kupfer.dicke.err = laenge.err;
+kupfer.breite.err = breite.err;
+kupfer.dicke.err = breite.err;
 
-stahl1.breite.err = laenge.err;
-stahl1.dicke.err = laenge.err;
+stahl1.breite.err = breite.err;
+stahl1.dicke.err = breite.err;
 
-pvc.breite.err = laenge.err;
-pvc.dicke.err = laenge.err;
+pvc.breite.err = breite.err;
+pvc.dicke.err = breite.err;
 
-gfk.breite.err = laenge.err;
-gfk.dicke.err = laenge.err;
+gfk.breite.err = breite.err;
+gfk.dicke.err = breite.err;
+
+# Die Länge zuweisen.
+alu.laenge = laenge;
+kupfer.laenge = laenge;
+stahl1.laenge = laenge;
+pvc.laenge = laenge;
+gfk.laenge = laenge;
 
 function material = moment_rechteck(material)
 	material.moment.val = material.breite.val * material.dicke.val^3 / 12;
@@ -201,3 +217,63 @@ printf("Kupfer:    I = %f ± %f m^4\n", kupfer.moment.val, kupfer.moment.err);
 printf("Stahl:     I = %f ± %f m^4\n", stahl1.moment.val, stahl1.moment.err);
 printf("PVC:       I = %f ± %f m^4\n", pvc.moment.val, pvc.moment.err);
 printf("GFK:       I = %f ± %f m^4\n", gfk.moment.val, gfk.moment.err);
+printf("\n")
+
+###############################################################################
+#                                 Rechnungen                                  #
+#                        Aufgabe 1.a -- Durchbiegungen                        #
+###############################################################################
+
+# Hier werden die Daten für gnuplot vorbereitet.
+aluminium_plot = [aluminium.durchbiegung.val ones(length(aluminium.durchbiegung.val), 1) * durchbiegung.err];
+kupfer_plot = [kupfer.durchbiegung.val ones(length(kupfer.durchbiegung.val), 1) * durchbiegung.err];
+stahl1_plot = [stahl1.durchbiegung.val ones(length(stahl1.durchbiegung.val), 1) * durchbiegung.err];
+
+# Daten speichern.
+save("a_alu.dat", "aluminium_plot");
+save("a_kupfer.dat", "kupfer_plot");
+save("a_stahl1.dat", "stahl1_plot");
+
+###############################################################################
+#                          Fitparameter aus gnuplot                           #
+#                        Aufgabe 1.a -- Durchbiegungen                        #
+###############################################################################
+
+# Hier müssen die Fitparameter aus gnuplot eingetragen werden. Diese sind in
+# der ``fit.log`` Datei zu finden. Dort werden die Parameter inklusive Fehler
+# angegeben. Die Bezeichnungen der Variablen ist hier und in gnuplot gleich.
+
+alu.mu.val = 1;
+alu.mu.err = 1;
+
+kupfer.mu.val = 1;
+kupfer.mu.err = 1;
+
+stahl1.mu.val = 1;
+stahl1.mu.err = 1;
+
+###############################################################################
+#                        Rechnungen mit Fitparametern                         #
+#                        Aufgabe 1.a -- Durchbiegungen                        #
+###############################################################################
+
+# Elastizitätsmodul ausrechnen.
+function mat = elast(mat)
+	mat.E.val = mat.laenge.val^3 / (mat.mu.val * mat.moment.val);
+	mat.E.err = sqrt(
+		(3 * mat.laenge.val^2 / (mat.mu.val * mat.moment.val) * mat.laenge.err)^2
+		+ (mat.laenge.val^3 / (mat.mu.val^2 * mat.moment.val) * mat.mu.err)^2
+		+ (mat.laenge.val^3 / (mat.mu.val * mat.moment.val^2) * mat.moment.err)^2
+	);
+endfunction
+
+alu = elast(alu);
+kupfer = elast(kupfer);
+stahl1 = elast(stahl1);
+
+printf("Elastizitätsmodule\n");
+printf("\n");
+printf("Aluminium: E = %f ± %f\n", alu.E.val, alu.E.err);
+printf("Kupfer:    E = %f ± %f\n", kupfer.E.val, kupfer.E.err);
+printf("Stahl:     E = %f ± %f\n", stahl1.E.val, stahl1.E.err);
+printf("\n");
