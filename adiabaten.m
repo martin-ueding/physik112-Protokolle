@@ -8,8 +8,8 @@
 ###############################################################################
 
 # Dauer von n Perioden mit Schwingern 1 und 2 [s].
-T1_list = [24.637 24.748 24.766 24.53];
-T2_list = [21.228 20.844 21.300 22.66 21.78];
+T1_list = [24.66 24.06 24.07 24.59 24.53 24.56 24.56 24.56 24.59 24.53];
+T2_list = [21 21.18 21.16 21.09 21.03 21.13 21.09 21.03 21.06 21.09];
 
 # Anzahl der Perioden
 n = 50;
@@ -35,10 +35,10 @@ Delta_r = 0.05e-3;
 V = 1.14e-3;
 
 # Luftdruck [Pa].
-global p_L = 1000e2;
+global p_L = 100437.7;
 
 # Fehler des Luftdrucks [Pa].
-Delta_p_L = 0;
+Delta_p_L = 1.0;
 
 # Ortsfaktor [N / kg].
 global g = 9.81;
@@ -57,7 +57,7 @@ endfunction
 function p = innendruck(m, r)
 	global p_L;
 	global g;
-	p = p_L + m * g / pi / r**2;
+	p = p_L + m * g / pi / r**2
 endfunction
 
 # Quatratisches Summieren.
@@ -104,9 +104,9 @@ k2 = exponent(m2, V, T2, r, innendruck(m2, r))
 Delta_k2 = error_kn(m1, V, T2, r, p_L, Delta_m, Delta_T2, Delta_r, Delta_p_L)
 
 k = mean([k1 k2])
-Delta_k = qsum([Delta_k1 Delta_k2])
+Delta_k = qsum([Delta_k1 Delta_k2]) / 2
 
-k_abweichung = abs(k - k_erwartet) / k_erwartet
+k_abweichung = (k - k_erwartet) / k_erwartet
 
 ###############################################################################
 #                                 Ergebnisse                                  #

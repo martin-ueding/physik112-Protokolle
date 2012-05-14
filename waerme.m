@@ -1,5 +1,6 @@
 #!/usr/bin/octave -fq
 # Copyright © 2012 Martin Ueding <dev@martin-ueding.de>
+# Änderungen Simon Schlepphorst
 
 # physik112 Experiment 117.
 
@@ -19,7 +20,7 @@ Delta_h = 0;
 m_cup = 90;
 
 # Mass of the water [g].
-m_water = 196 - m_cup
+m_water = 200 - m_cup
 
 # Mass of the objects [g].
 m_al = 155;
@@ -61,7 +62,7 @@ u_zn = 118.710;
 # Source: Wolfram|Alpha
 
 # Height scale for barometric formula [m].
-h_0 = 8400e3;
+h_0 = 7800;
 
 # Source: Gerthsen Physik 24
 
@@ -90,7 +91,10 @@ function Delta_T = error_boil_temp(p, Delta_p)
 	Delta_T = Delta_p * (0.03687 - 0.000044 * (-760 + p));
 endfunction
 
-function Delta_C = delta_c(C_cal, T_eq, T_cal, T_boil, Delta_T, Delta_T_boil)
+function Delta_C = delta_c(C_cal, Delta_C_cal, T_eq, T_cal, T_boil, Delta_T, Delta_T_boil)
+	# Î"C_cal
+	part_C_cal = Delta_C_cal*((T_eq - T_cal)/(T_boil - T_eq))
+
 	# ΔT_eq
 	part_T_eq = Delta_T * C_cal*(1/(T_boil - T_eq) + (-T_cal + T_eq)/(T_boil - T_eq)^2)
 
@@ -98,9 +102,9 @@ function Delta_C = delta_c(C_cal, T_eq, T_cal, T_boil, Delta_T, Delta_T_boil)
 	part_T_cal = Delta_T * C_cal*(-(1/(T_boil - T_eq)))
 
 	# ΔT_boil
-	part_T_boil = Delta_T_boil * (-((C_cal*(-T_cal + T_eq))/(T_boil - T_eq)^2))
+	part_T_boil = Delta_T_boil * (-((C_cal*(T_eq - T_cal))/(T_boil - T_eq)^2))
 
-	Delta_C = sqrt(sumsq([part_T_eq part_T_cal part_T_boil]))
+	Delta_C = sqrt(sumsq([part_C_cal part_T_eq part_T_cal part_T_boil]))
 endfunction
 
 ###############################################################################
@@ -108,7 +112,7 @@ endfunction
 ###############################################################################
 
 # Specific heat of the cup.
-c_brass_lit = c_cu_lit * .63 + c_zn_lit * .37;
+c_brass_lit = c_cu_lit * .63 + c_zn_lit * .37
 u_brass = u_cu * .63 + u_zn * .37
 
 # Heat coefficient of the cup.
@@ -123,8 +127,8 @@ C_cal = C_cup + C_water
 Delta_C_cal = sqrt(sumsq([Delta_C_cup Delta_C_water]))
 
 # Calculate pressure to the given height.
-p = p_zero #* exp(-h / h_0)
-Delta_p = Delta_p_zero * p_zero * (-1 / h_0) * exp(-h / h_0)
+p = p_zero * exp(-h / h_0)
+Delta_p = Delta_p_zero * torr_per_hPa * exp(-h / h_0)
 
 # Calculate boiling temperature at given pressure.
 T_boil = boil_temp(p)
@@ -132,13 +136,13 @@ Delta_T_boil = error_boil_temp(p, Delta_p)
 
 # Total heat capacity.
 C_al = C_cal * (T_eq_al - T_cal_al) / (T_boil - T_eq_al)
-Delta_C_al = delta_c(C_cal, T_eq_al, T_cal_al, T_boil, Delta_T, Delta_T_boil)
+Delta_C_al = delta_c(C_cal, Delta_C_cal, T_eq_al, T_cal_al, T_boil, Delta_T, Delta_T_boil)
 
 C_brass = C_cal * (T_eq_brass - T_cal_brass) / (T_boil - T_eq_brass)
-Delta_C_brass = delta_c(C_cal, T_eq_brass, T_cal_brass, T_boil, Delta_T, Delta_T_boil)
+Delta_C_brass = delta_c(C_cal, Delta_C_cal, T_eq_brass, T_cal_brass, T_boil, Delta_T, Delta_T_boil)
 
 C_cu = C_cal * (T_eq_cu - T_cal_cu) / (T_boil - T_eq_cu)
-Delta_C_cu = delta_c(C_cal, T_eq_cu, T_cal_cu, T_boil, Delta_T, Delta_T_boil)
+Delta_C_cu = delta_c(C_cal, Delta_C_cal, T_eq_cu, T_cal_cu, T_boil, Delta_T, Delta_T_boil)
 
 # Specific heat capacity.
 c_al = C_al / m_al
@@ -170,19 +174,19 @@ cm_al = c_al * u_al
 Delta_cm_al = Delta_c_al * u_al
 
 cm_brass = c_brass * u_brass
-Delta_cm_brass = Delta_c_brass * u_al
+Delta_cm_brass = Delta_c_brass * u_brass
 
 cm_cu = c_cu * u_cu
-Delta_cm_cu = Delta_c_cu * u_al
+Delta_cm_cu = Delta_c_cu * u_cu
 
 # Deviations
-dev_al = abs(c_al - c_al_lit) / c_al_lit
-dev_brass = abs(c_brass - c_brass_lit) / c_brass_lit
-dev_cu = abs(c_cu - c_cu_lit) / c_cu_lit
+dev_al = (c_al - c_al_lit) / c_al_lit
+dev_brass = (c_brass - c_brass_lit) / c_brass_lit
+dev_cu = (c_cu - c_cu_lit) / c_cu_lit
 
-dev_cm_al = abs(cm_al - dulong_petit) / dulong_petit
-dev_cm_brass = abs(cm_brass - dulong_petit) / dulong_petit
-dev_cm_cu = abs(cm_cu - dulong_petit) / dulong_petit
+dev_cm_al = (cm_al - dulong_petit) / dulong_petit
+dev_cm_brass = (cm_brass - dulong_petit) / dulong_petit
+dev_cm_cu = (cm_cu - dulong_petit) / dulong_petit
 
 ###############################################################################
 #                                   Output                                    #
