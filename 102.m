@@ -3,13 +3,18 @@
 
 # Versuch 102
 
+# In diesem Programm müssen zum einen die Messwerte selbst eingetragen werden.
+# Zum anderen müssen die Fitparameter aus gnuplot hier übertragen werden. Diese
+# Stellen habe ich mit ``TODO`` gekennzeichnet.
+
 ###############################################################################
 #                                  Messungen                                  #
 #                                 Abmessungen                                 #
 ###############################################################################
 
-# Abmessungen der Stäbe [m].
+# TODO Messwerte hier hin.
 
+# Abmessungen der Stäbe [m].
 alu.breite.val = 1;
 alu.dicke.val = 1;
 
@@ -18,6 +23,9 @@ kupfer.dicke.val = 1;
 
 stahl1.breite.val = 1;
 stahl1.dicke.val = 1;
+
+stahl2.breite.val = 1;
+stahl2.dicke.val = 1;
 
 pvc.breite.val = 1;
 pvc.dicke.val = 1;
@@ -37,6 +45,8 @@ laenge.err = 0.5e-3;
 #                                  Messungen                                  #
 #                        Aufgabe 1.a -- Durchbiegungen                        #
 ###############################################################################
+
+# TODO Messwerte hier hin.
 
 # Dies sind die Durchbiegungen. Dabei die Paare als Kraft [N] und Durchbiegung
 # [m] angeben.
@@ -80,6 +90,8 @@ durchbiegung.err = 0.1;
 #                          Aufgabe 1.b -- Knicklast                           #
 ###############################################################################
 
+# TODO Messwerte hier hin.
+
 stahl2.knickung.val = [
    0.466742   0.053706
    0.282569   0.870156
@@ -118,10 +130,12 @@ knickung.err = 0.1;
 #                        Aufgabe 2.a -- Torsionspendel                        #
 ###############################################################################
 
+# TODO Messwerte hier hin.
+
 # Die Messwerte vom Torsionspendel. Dabei den Abstand der Massen [m], die
 # Anzahl der Perioden und die Dauer [s] angeben.
 
-stahl3.schwingung = [
+stahl3.schwingung.val = [
 	25		3		1
 	25		4		1
 	25		6		1
@@ -165,6 +179,13 @@ stahl3.durchmesser.val = 1;
 # Und der passende Fehler [m].
 stahl3.durchmesser.err = 1;
 
+# Messfehler in der Periode [s].
+periode.err = 0.2;
+
+# Masse der extra Scheiben für das Pendel.
+m.val = 1;
+m.err = 1;
+
 ###############################################################################
 #                                 Rechnungen                                  #
 #                           Flächenträgheitsmomente                           #
@@ -180,6 +201,9 @@ kupfer.dicke.err = breite.err;
 stahl1.breite.err = breite.err;
 stahl1.dicke.err = breite.err;
 
+stahl2.breite.err = breite.err;
+stahl2.dicke.err = breite.err;
+
 pvc.breite.err = breite.err;
 pvc.dicke.err = breite.err;
 
@@ -190,6 +214,7 @@ gfk.dicke.err = breite.err;
 alu.laenge = laenge;
 kupfer.laenge = laenge;
 stahl1.laenge = laenge;
+stahl2.laenge = laenge;
 pvc.laenge = laenge;
 gfk.laenge = laenge;
 
@@ -209,6 +234,7 @@ endfunction
 alu = I_rechteck(alu);
 kupfer = I_rechteck(kupfer);
 stahl1 = I_rechteck(stahl1);
+stahl2 = I_rechteck(stahl2);
 pvc = I_rechteck(pvc);
 gfk = I_rechteck(gfk);
 
@@ -240,6 +266,8 @@ save("a_stahl1.dat", "stahl1_plot");
 #                          Fitparameter aus gnuplot                           #
 #                        Aufgabe 1.a -- Durchbiegungen                        #
 ###############################################################################
+
+# TODO Parameter hier eintragen.
 
 # Hier müssen die Fitparameter aus gnuplot eingetragen werden. Diese sind in
 # der ``fit.log`` Datei zu finden. Dort werden die Parameter inklusive Fehler
@@ -300,6 +328,8 @@ save("b_gfk.dat", "gfk_plot");
 #                          Aufgabe 1.b -- Knicklast                           #
 ###############################################################################
 
+# TODO Parameter hier eintragen.
+
 # Hier kommen die aus den Plots abgelesenen Werte für die Knicklast rein.
 stahl2.F.val = 1;
 stahl2.F.err = 1;
@@ -331,6 +361,44 @@ gfk = elast2(gfk);
 printf("Elastizitätsmodule\n")
 printf("\n")
 printf("Stahl: E = %f ± %f\n", stahl2.E.val, stahl2.E.err);
-printf("PVC: E = %f ± %f\n", pvc.E.val, pvc.E.err);
-printf("PVC: E = %f ± %f\n", gfk.E.val, gfk.E.err);
+printf("PVC:   E = %f ± %f\n", pvc.E.val, pvc.E.err);
+printf("GFK:   E = %f ± %f\n", gfk.E.val, gfk.E.err);
 printf("\n")
+
+stahl.E.val = mean([stahl1.E.val stahl2.E.val]);
+stahl.E.err = sqrt(sumsq([stahl1.E.err stahl2.E.err])) / 2;
+
+###############################################################################
+#                                 Rechnungen                                  #
+#                        Aufgabe 2.a -- Torsionspendel                        #
+###############################################################################
+
+stahl3_plot = [stahl3.schwingung.val(:, 1) stahl3.schwingung.val(:, 3) ./ stahl3.schwingung.val(:, 2) knickung.err ./ stahl3.schwingung.val(:, 2)];
+
+save("2a.dat", "stahl3_plot");
+
+###############################################################################
+#                          Fitparameter aus gnuplot                           #
+#                        Aufgabe 2.a -- Torsionspendel                        #
+###############################################################################
+
+# TODO Parameter hier eintragen.
+
+alpha.val = 1;
+alpha.err = 1;
+
+beta.val = 1;
+beta.err = 1;
+
+D.val = 8 pi^2 m.val / beta.val;
+D.err = sqrt(
+	(8 * pi^2 / beta.val * m.val)^2
+	+ (8 * pi^2 * m.val / beta.val^2 * beta.err)
+);
+
+Theta_Stange.val = alpha.val * D.val / (4 * pi^2) - 2 Theta_Scheibe;
+Theta_Stange.err = sqrt(
+	(D.val / (4 * pi^2) * alpha.err)^2
+	+ (alpha.val / (4 * pi^2) * D.err)^2
+	+ (2 Theta_Scheibe.err)^2
+);
