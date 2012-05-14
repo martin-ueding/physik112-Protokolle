@@ -350,7 +350,7 @@ messen.
 Außerdem bestimmen wir den Durchmesser des Stahldrahtes mit einer
 Bügelmessschraube auf:
 
-.. math:: d = (\checkmark \pm \checkmark) \, \mathrm{m}
+.. math:: d = (\square \pm \square) \, \mathrm{m}
 
 Auswertung
 ==========
@@ -460,7 +460,7 @@ den einzelnen Variablen:
 
     \Delta E = \sqrt{
     \left( \frac{2l}{I \pi^2} F \Delta l \right)^2
-    + \left( \frac{-l^2}{I^2 \pi^2} \Delta I \right)^2
+    + \left( \frac{-l^2}{I^2 \pi^2} F \Delta I \right)^2
     + \left( \frac{l^2}{I \pi^2} \Delta F \right)^2
     }
 
@@ -473,6 +473,14 @@ Stahl   –           –
 PVC     –           –
 GFK     –           –
 =====   =========   ================
+
+Die zwei Messungen für Stahl kombiniere ich in ein Endergebnis:
+
+.. math::
+
+    E = \frac 12 (E_1 + E_2) = \square
+
+    \Delta E = \frac 12 \sqrt{(\Delta E_1)^2 + (\Delta E_2)^2} = \square
 
 Aufgabe 2.a (Auswertung)
 ------------------------
@@ -512,12 +520,12 @@ Als Ergebnis erhalte ich:
 Aus den Koeffizienten kann ich dann die Richtkonstante :math:`D` bestimmen,
 indem ich umstelle.
 
-.. math:: D = \frac{8 \pi^2 m}{\beta} = \checkmark
+.. math:: D = \frac{8 \pi^2 m}{\beta} = \square
 
 Mit dem :math:`D` kann ich nun das Trägheitsmoment der Stangenanordnung
 errechnen:
 
-.. math:: \Theta_\mathrm{Stange} = \frac{\alpha D}{4 \pi^2} - 2 \Theta_\mathrm{Scheibe} = \checkmark
+.. math:: \Theta_\mathrm{Stange} = \frac{\alpha D}{4 \pi^2} - 2 \Theta_\mathrm{Scheibe} = \square
 
 
 Die Fehler bestimme ich wieder durch Fehlerfortpflanzung aus den einzelnen
@@ -528,7 +536,17 @@ Fehlern.
     \Delta D = \sqrt{
     \left( \frac{8 \pi^2}{\beta} \Delta m \right)^2
     + \left( -\frac{8 \pi^2 m}{\beta^2} \Delta \beta \right)^2
-    } = \checkmark
+    } = \square
+
+Und der Fehler für das Trägheitsmoment:
+
+.. math::
+
+    \Delta \Theta_\mathrm{Stange} = \sqrt{
+    \left( \frac D{4 \pi^2} \Delta \alpha \right)^2
+    + \left( \frac \alpha{4 \pi^2} \Delta D \right)^2
+    + \left( -2 \Delta \Theta_\mathrm{Scheibe} \right)^2
+    } = \square
 
 Aufgabe 2.a (Auswertung)
 ------------------------
@@ -537,16 +555,16 @@ Aus dem gemessenen Durchmesser des Drahtes bestimmen wir den Radius:
 
 .. math::
 
-    r = \frac 12 d = \checkmark
+    r = \frac 12 d = \square
 
-    \Delta r = \frac 12 \Delta r = \checkmark
+    \Delta r = \frac 12 \Delta d = \square
 
 Aus der Richtkonstante :math:`D` bestimme ich das Schubmodul :math:`G` mit
 folgender Formel:
 
 .. math::
 
-    G = \frac{l}{\pi r^4} D = \checkmark
+    G = \frac{l}{\pi r^4} D = \square
 
 Den Fehler bestimme ich mit:
 
@@ -556,10 +574,26 @@ Den Fehler bestimme ich mit:
     \left( \frac{l}{\pi r^4} \Delta D \right)^2
     + \left( \frac{1}{\pi r^4} D \Delta l \right)^2
     + \left( - \frac{4 l}{\pi r^5} D \Delta r \right)^2
-    } = \checkmark
+    } = \square
 
 Resultat
 ========
+
+Für die verschiedenen Stäbe erhalte ich als Elastizitätsmodul:
+
+=========   =========   ================
+Stab        :math:`E`   :math:`\Delta E`
+=========   =========   ================
+Aluminium   –           –
+Kupfer      –           –
+Stahl       –           –
+PVC         –           –
+GFK         –           –
+=========   =========   ================
+
+Als Schubmodul für den Stahldraht erhalte ich:
+
+.. math:: (\square \pm \square) \, \square
 
 Diskussion
 ==========
