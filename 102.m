@@ -111,6 +111,8 @@ gfk.knickung.val = [
    0.848369   0.065128
 ];
 
+knickung.err = 0.1;
+
 ###############################################################################
 #                                  Messungen                                  #
 #                        Aufgabe 2.a -- Torsionspendel                        #
@@ -277,3 +279,45 @@ printf("Aluminium: E = %f ± %f\n", alu.E.val, alu.E.err);
 printf("Kupfer:    E = %f ± %f\n", kupfer.E.val, kupfer.E.err);
 printf("Stahl:     E = %f ± %f\n", stahl1.E.val, stahl1.E.err);
 printf("\n");
+
+###############################################################################
+#                                 Rechnungen                                  #
+#                          Aufgabe 1.b -- Knicklast                           #
+###############################################################################
+
+# Daten zum Plotten speichern.
+stahl2_plot = [stahl2.knickung.val ones(length(stahl2.knickung.val), 1) * knickung.err];
+pvc_plot = [pvc.knickung.val ones(length(pvc.knickung.val), 1) * knickung.err];
+gfk_plot = [gfk.knickung.val ones(length(gfk.knickung.val), 1) * knickung.err];
+
+# Daten speichern.
+save("b_stahl2.dat", "stahl2_plot");
+save("b_pvc.dat", "pvc_plot");
+save("b_gfk.dat", "gfk_plot");
+
+###############################################################################
+#                          Fitparameter aus gnuplot                           #
+#                          Aufgabe 1.b -- Knicklast                           #
+###############################################################################
+
+# Hier kommen die aus den Plots abgelesenen Werte für die Knicklast rein.
+stahl2.F.val = 1;
+stahl2.F.err = 1;
+
+pvc.F.val = 1;
+pvc.F.err = 1;
+
+gfk.F.val = 1;
+gfk.F.err = 1;
+
+###############################################################################
+#                                 Rechnungen                                  #
+#                          Aufgabe 1.c -- Knicklast                           #
+###############################################################################
+
+function mat = elast2(mat)
+	mat.E.val = mat.laenge.val^2 / (mat.moment.val * pi^2) * mat.F.val;
+	mat.E.err = sqrt(
+		(2 * mat.laenge.val / (mat.moment.val * pi^2) * mat.F.val * mat.laenge.err)^2
+	);
+endfunction
