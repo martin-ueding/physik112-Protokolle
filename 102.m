@@ -82,7 +82,7 @@ stahl.durchbiegung.val = [
 
 
 # Fehler in den Durchbiegungen [m].
-durchbiegung.err = 0.1;
+durchbiegung.err = 0.1e-3;
 
 ###############################################################################
 #                                  Messungen                                  #
