@@ -201,6 +201,14 @@ endfunction
 alu.E.lit = 72e9;
 kupfer.E.lit = 120e9;
 stahl.E.lit = 195e9;
+stahl2.E.lit = 195e9;
+
+# https://de.wikipedia.org/wiki/Polyvinylchlorid
+pvc.E.lit = 2000e6;
+
+# http://www.tf.uni-kiel.de/matwis/amat/mw1_ge/kap_7/illustr/t7_1_2.html
+gfk.E.lit = 30e9;
+
 G.lit = 80e9;
 
 ###############################################################################
@@ -372,9 +380,9 @@ gfk = elast2(gfk);
 
 printf("Elastizitätsmodule\n")
 printf("\n")
-printf("Stahl: E = %.2e ± %.2e N/m² (%.1e)\n", stahl2.E.val, stahl2.E.err, stahl2.E.err/stahl2.E.val);
-printf("PVC:   E = %.2e ± %.2e N/m² (%.1e)\n", pvc.E.val, pvc.E.err, pvc.E.err/pvc.E.val);
-printf("GFK:   E = %.2e ± %.2e N/m² (%.1e)\n", gfk.E.val, gfk.E.err, gfk.E.err/gfk.E.val);
+printf("Stahl: E = %.2e ± %.2e N/m² (%.1e) [%.1e]\n", stahl2.E.val, stahl2.E.err, stahl2.E.err/stahl2.E.val, epsilon(stahl2.E));
+printf("PVC:   E = %.2e ± %.2e N/m² (%.1e) [%.1e]\n", pvc.E.val, pvc.E.err, pvc.E.err/pvc.E.val, epsilon(pvc.E));
+printf("GFK:   E = %.2e ± %.2e N/m² (%.1e) [%.1e]\n", gfk.E.val, gfk.E.err, gfk.E.err/gfk.E.val, epsilon(gfk.E));
 printf("\n")
 
 stahl.E.val = mean([stahl.E.val stahl2.E.val]);
