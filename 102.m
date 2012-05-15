@@ -168,11 +168,11 @@ stahl3.schwingung.val = [
 	0			15		16.4
 ];
 
-# Der Durchmesser des Stahldrahtes [m].
-stahl3.durchmesser.val = 1.06e-3;
+# Der Durchmesser des Stahldrahtes [m]. Umgerechnet auf einen Radius.
+stahl3.radius.val = 1.06e-3 / 2;
 
 # Und der passende Fehler [m].
-stahl3.durchmesser.err = 0.01e-3;
+stahl3.radius.err = 0.01e-3 / 2;
 
 # Messfehler in der Periode [s].
 periode.err = 0.2;
@@ -252,11 +252,11 @@ gfk = I_rechteck(gfk);
 
 printf("Flächenträgheitsmomente\n");
 printf("\n")
-printf("Aluminium: I = %.2e ± %.2e m^4 (%.2e)\n", alu.I.val, alu.I.err, alu.I.err/alu.I.val);
-printf("Kupfer:    I = %.2e ± %.2e m^4 (%.2e)\n", kupfer.I.val, kupfer.I.err, kupfer.I.err/kupfer.I.val);
-printf("Stahl:     I = %.2e ± %.2e m^4 (%.2e)\n", stahl.I.val, stahl.I.err, stahl.I.err/stahl.I.val);
-printf("PVC:       I = %.2e ± %.2e m^4 (%.2e)\n", pvc.I.val, pvc.I.err, pvc.I.err/pvc.I.val);
-printf("GFK:       I = %.2e ± %.2e m^4 (%.2e)\n", gfk.I.val, gfk.I.err, gfk.I.err/gfk.I.val);
+printf("Aluminium: I = %.2e ± %.2e m^4 (%.1e)\n", alu.I.val, alu.I.err, alu.I.err/alu.I.val);
+printf("Kupfer:    I = %.2e ± %.2e m^4 (%.1e)\n", kupfer.I.val, kupfer.I.err, kupfer.I.err/kupfer.I.val);
+printf("Stahl:     I = %.2e ± %.2e m^4 (%.1e)\n", stahl.I.val, stahl.I.err, stahl.I.err/stahl.I.val);
+printf("PVC:       I = %.2e ± %.2e m^4 (%.1e)\n", pvc.I.val, pvc.I.err, pvc.I.err/pvc.I.val);
+printf("GFK:       I = %.2e ± %.2e m^4 (%.1e)\n", gfk.I.val, gfk.I.err, gfk.I.err/gfk.I.val);
 printf("\n")
 
 ###############################################################################
@@ -315,9 +315,9 @@ stahl = elast(stahl);
 
 printf("Elastizitätsmodule\n");
 printf("\n");
-printf("Aluminium: E = %.2e ± %.2e N/m² (%.2e) [%.2e]\n", alu.E.val, alu.E.err, alu.E.err/alu.E.val, epsilon(alu.E));
-printf("Kupfer:    E = %.2e ± %.2e N/m² (%.2e) [%.2e]\n", kupfer.E.val, kupfer.E.err, kupfer.E.err/kupfer.E.val, epsilon(kupfer.E));
-printf("Stahl:     E = %.2e ± %.2e N/m² (%.2e) [%.2e]\n", stahl.E.val, stahl.E.err, stahl.E.err/stahl.E.val, epsilon(stahl.E));
+printf("Aluminium: E = %.2e ± %.2e N/m² (%.1e) [%.1e]\n", alu.E.val, alu.E.err, alu.E.err/alu.E.val, epsilon(alu.E));
+printf("Kupfer:    E = %.2e ± %.2e N/m² (%.1e) [%.1e]\n", kupfer.E.val, kupfer.E.err, kupfer.E.err/kupfer.E.val, epsilon(kupfer.E));
+printf("Stahl:     E = %.2e ± %.2e N/m² (%.1e) [%.1e]\n", stahl.E.val, stahl.E.err, stahl.E.err/stahl.E.val, epsilon(stahl.E));
 printf("\n");
 
 ###############################################################################
@@ -372,9 +372,9 @@ gfk = elast2(gfk);
 
 printf("Elastizitätsmodule\n")
 printf("\n")
-printf("Stahl: E = %.2e ± %.2e N/m² (%.2e)\n", stahl2.E.val, stahl2.E.err, stahl2.E.err/stahl2.E.val);
-printf("PVC:   E = %.2e ± %.2e N/m² (%.2e)\n", pvc.E.val, pvc.E.err, pvc.E.err/pvc.E.val);
-printf("GFK:   E = %.2e ± %.2e N/m² (%.2e)\n", gfk.E.val, gfk.E.err, gfk.E.err/gfk.E.val);
+printf("Stahl: E = %.2e ± %.2e N/m² (%.1e)\n", stahl2.E.val, stahl2.E.err, stahl2.E.err/stahl2.E.val);
+printf("PVC:   E = %.2e ± %.2e N/m² (%.1e)\n", pvc.E.val, pvc.E.err, pvc.E.err/pvc.E.val);
+printf("GFK:   E = %.2e ± %.2e N/m² (%.1e)\n", gfk.E.val, gfk.E.err, gfk.E.err/gfk.E.val);
 printf("\n")
 
 stahl.E.val = mean([stahl.E.val stahl2.E.val]);
@@ -418,12 +418,12 @@ D.err = sqrt(
 );
 
 # Radius der Zusatzmassen [m], aus der Aufgabenstellung.
-r.val = 15e-3;
-r.err = 0;
-d.val = 16e-3;
-d.err = 0;
+massen.r.val = 15e-3;
+massen.r.err = 0;
+massen.d.val = 16e-3;
+massen.d.err = 0;
 
-Theta_Scheibe.val = m.val * r.val^2 / 4 + m.val * d.val^2 / 12;
+Theta_Scheibe.val = m.val * massen.r.val^2 / 4 + m.val * massen.d.val^2 / 12;
 Theta_Scheibe.err = 0;
 
 Theta_Stange.val = alpha.val * D.val / (4 * pi^2) - 2 * Theta_Scheibe.val;
@@ -433,15 +433,16 @@ Theta_Stange.err = sqrt(
 	+ (2 * Theta_Scheibe.err)^2
 );
 
-G.val = l.val / (pi * r.val^4) * D.val;
-part1 = l.val / (pi * r.val^4) * D.err;
-part2 = 1 / (pi * r.val^4) * D.val * l.err;
-part3 = 4 * l.val / (pi * r.val^5) * D.val * r.err;
+G.val = l.val / (pi * stahl3.radius.val^4) * D.val;
+part1 = l.val / (pi * stahl3.radius.val^4) * D.err;
+part2 = 1 / (pi * stahl3.radius.val^4) * D.val * l.err;
+part3 = 4 * l.val / (pi * stahl3.radius.val^5) * D.val * stahl3.radius.err;
 G.err = sqrt(part1^2 + part2^2 + part3^2);
 
 printf("Schubmodul\n");
 printf("\n");
-printf("D        = %.2e ± %.2e Nm/rad (%.2e)\n", D.val, D.err, D.err/D.val);
-printf("Θ_Stange = %.2e ± %.2e kg m²  (%.2e)\n", Theta_Stange.val, Theta_Stange.err, Theta_Stange.err/Theta_Stange.val);
-printf("G        = %.2e ± %.2e N/m²   (%.2e) [%.2e]\n", G.val, G.err, G.err/G.val, epsilon(G));
+printf("r        = %.2e ± %.2e m      (%.1e)\n", stahl3.radius.val, stahl3.radius.err, stahl3.radius.err/stahl3.radius.val);
+printf("D        = %.2e ± %.2e Nm/rad (%.1e)\n", D.val, D.err, D.err/D.val);
+printf("Θ_Stange = %.2e ± %.2e kg m²  (%.1e)\n", Theta_Stange.val, Theta_Stange.err, Theta_Stange.err/Theta_Stange.val);
+printf("G        = %.2e ± %.2e N/m²   (%.1e) [%.1e]\n", G.val, G.err, G.err/G.val, epsilon(G));
 printf("\n");
