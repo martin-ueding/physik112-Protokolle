@@ -186,6 +186,24 @@ l.val = 15e-2;
 l.err = 1e-2;
 
 ###############################################################################
+#                                 Funktionen                                  #
+###############################################################################
+
+function dev = epsilon(obj)
+	dev = (obj.val - obj.lit) / obj.lit;
+endfunction
+
+###############################################################################
+#                               Literaturwerte                                #
+#                    Quelle: Gerthsen Physik, 24. Auflage                     #
+###############################################################################
+
+alu.E.lit = 72e9;
+kupfer.E.lit = 120e9;
+stahl.E.lit = 195e9;
+G.lit = 80e9;
+
+###############################################################################
 #                                 Rechnungen                                  #
 #                           Flächenträgheitsmomente                           #
 ###############################################################################
@@ -297,9 +315,9 @@ stahl = elast(stahl);
 
 printf("Elastizitätsmodule\n");
 printf("\n");
-printf("Aluminium: E = %.2e ± %.2e N/m² (%.2e)\n", alu.E.val, alu.E.err, alu.E.err/alu.E.val);
-printf("Kupfer:    E = %.2e ± %.2e N/m² (%.2e)\n", kupfer.E.val, kupfer.E.err, kupfer.E.err/kupfer.E.val);
-printf("Stahl:     E = %.2e ± %.2e N/m² (%.2e)\n", stahl.E.val, stahl.E.err, stahl.E.err/stahl.E.val);
+printf("Aluminium: E = %.2e ± %.2e N/m² (%.2e) [%.2e]\n", alu.E.val, alu.E.err, alu.E.err/alu.E.val, epsilon(alu.E));
+printf("Kupfer:    E = %.2e ± %.2e N/m² (%.2e) [%.2e]\n", kupfer.E.val, kupfer.E.err, kupfer.E.err/kupfer.E.val, epsilon(kupfer.E));
+printf("Stahl:     E = %.2e ± %.2e N/m² (%.2e) [%.2e]\n", stahl.E.val, stahl.E.err, stahl.E.err/stahl.E.val, epsilon(stahl.E));
 printf("\n");
 
 ###############################################################################
@@ -395,7 +413,7 @@ beta.err = 0.07179;
 
 D.val = 8 * pi^2 * m.val / beta.val;
 D.err = sqrt(
-	(8 * pi^2 / beta.val * m.val)^2
+	(8 * pi^2 / beta.val * m.err)^2
 	+ (8 * pi^2 * m.val / beta.val^2 * beta.err)
 );
 
@@ -416,13 +434,14 @@ Theta_Stange.err = sqrt(
 );
 
 G.val = l.val / (pi * r.val^4) * D.val;
-G.err = sqrt(
-	(l.val / (pi * r.val^4) * D.err)^2
-	+ (1 / (pi * r.val^4) * D.val * l.err)^2
-	+ (4 * l.val / (pi * r.val^5) * D.val * r.err)^2
-);
+part1 = l.val / (pi * r.val^4) * D.err;
+part2 = 1 / (pi * r.val^4) * D.val * l.err;
+part3 = 4 * l.val / (pi * r.val^5) * D.val * r.err;
+G.err = sqrt(part1^2 + part2^2 + part3^2);
 
 printf("Schubmodul\n");
 printf("\n");
-printf("G = %.2e ± %.2e N/m² (%.2e)\n", G.val, G.err, G.err/G.val);
+printf("D        = %.2e ± %.2e Nm/rad (%.2e)\n", D.val, D.err, D.err/D.val);
+printf("Θ_Stange = %.2e ± %.2e kg m²  (%.2e)\n", Theta_Stange.val, Theta_Stange.err, Theta_Stange.err/Theta_Stange.val);
+printf("G        = %.2e ± %.2e N/m²   (%.2e) [%.2e]\n", G.val, G.err, G.err/G.val, epsilon(G));
 printf("\n");
