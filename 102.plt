@@ -84,8 +84,13 @@ set grid
 # Set the title of the whole graph.
 set title "physik111 Versuch 102: Aufgabe 2.a"
 
+T(x) = alpha + beta * x
+
+#fit T(x) "2a.dat" using 1:2:3 via alpha,beta
+
 # Plot the data with the fit.
-plot "2a.dat" with yerrorbars lc rgb "#000000" title "Torsionspendel"
+plot "2a.dat" with yerrorbars lc rgb "#000000" title "Torsionspendel", \
+	T(x) lc rgb "#000000" title "Fit"
 
 # Set the output again so that the PDF is really written to.
 set output
