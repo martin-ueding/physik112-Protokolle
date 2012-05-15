@@ -234,11 +234,11 @@ gfk = I_rechteck(gfk);
 
 printf("Flächenträgheitsmomente\n");
 printf("\n")
-printf("Aluminium: I = %.2e ± %.2e m^4\n", alu.I.val, alu.I.err);
-printf("Kupfer:    I = %.2e ± %.2e m^4\n", kupfer.I.val, kupfer.I.err);
-printf("Stahl:     I = %.2e ± %.2e m^4\n", stahl.I.val, stahl.I.err);
-printf("PVC:       I = %.2e ± %.2e m^4\n", pvc.I.val, pvc.I.err);
-printf("GFK:       I = %.2e ± %.2e m^4\n", gfk.I.val, gfk.I.err);
+printf("Aluminium: I = %.2e ± %.2e m^4 (%.2e)\n", alu.I.val, alu.I.err, alu.I.err/alu.I.val);
+printf("Kupfer:    I = %.2e ± %.2e m^4 (%.2e)\n", kupfer.I.val, kupfer.I.err, kupfer.I.err/kupfer.I.val);
+printf("Stahl:     I = %.2e ± %.2e m^4 (%.2e)\n", stahl.I.val, stahl.I.err, stahl.I.err/stahl.I.val);
+printf("PVC:       I = %.2e ± %.2e m^4 (%.2e)\n", pvc.I.val, pvc.I.err, pvc.I.err/pvc.I.val);
+printf("GFK:       I = %.2e ± %.2e m^4 (%.2e)\n", gfk.I.val, gfk.I.err, gfk.I.err/gfk.I.val);
 printf("\n")
 
 ###############################################################################
@@ -297,9 +297,9 @@ stahl = elast(stahl);
 
 printf("Elastizitätsmodule\n");
 printf("\n");
-printf("Aluminium: E = %.2e ± %.2e N/m²\n", alu.E.val, alu.E.err);
-printf("Kupfer:    E = %.2e ± %.2e N/m²\n", kupfer.E.val, kupfer.E.err);
-printf("Stahl:     E = %.2e ± %.2e N/m²\n", stahl.E.val, stahl.E.err);
+printf("Aluminium: E = %.2e ± %.2e N/m² (%.2e)\n", alu.E.val, alu.E.err, alu.E.err/alu.E.val);
+printf("Kupfer:    E = %.2e ± %.2e N/m² (%.2e)\n", kupfer.E.val, kupfer.E.err, kupfer.E.err/kupfer.E.val);
+printf("Stahl:     E = %.2e ± %.2e N/m² (%.2e)\n", stahl.E.val, stahl.E.err, stahl.E.err/stahl.E.val);
 printf("\n");
 
 ###############################################################################
@@ -354,9 +354,9 @@ gfk = elast2(gfk);
 
 printf("Elastizitätsmodule\n")
 printf("\n")
-printf("Stahl: E = %.2e ± %.2e N/m²\n", stahl2.E.val, stahl2.E.err);
-printf("PVC:   E = %.2e ± %.2e N/m²\n", pvc.E.val, pvc.E.err);
-printf("GFK:   E = %.2e ± %.2e N/m²\n", gfk.E.val, gfk.E.err);
+printf("Stahl: E = %.2e ± %.2e N/m² (%.2e)\n", stahl2.E.val, stahl2.E.err, stahl2.E.err/stahl2.E.val);
+printf("PVC:   E = %.2e ± %.2e N/m² (%.2e)\n", pvc.E.val, pvc.E.err, pvc.E.err/pvc.E.val);
+printf("GFK:   E = %.2e ± %.2e N/m² (%.2e)\n", gfk.E.val, gfk.E.err, gfk.E.err/gfk.E.val);
 printf("\n")
 
 stahl.E.val = mean([stahl.E.val stahl2.E.val]);
