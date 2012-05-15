@@ -131,29 +131,29 @@ knickung.err = 0.02;
 # Anzahl der Perioden und die Dauer [s] angeben.
 
 stahl3.schwingung.val = [
-	25		3		3.8
-	25		4		4.8
-	25		6		7.4
-	25		8		10.2
-	25		10		12.0
+	25e-2		3		3.8
+	25e-2		4		4.8
+	25e-2		6		7.4
+	25e-2		8		10.2
+	25e-2		10		12.0
 
-	50		3		4.8
-	50		4		6.3
-	50		6		9.7
-	50		8		12.9
-	50		10		16.2
+	50e-2		3		4.8
+	50e-2		4		6.3
+	50e-2		6		9.7
+	50e-2		8		12.9
+	50e-2		10		16.2
 
-	75		3		5.9
-	75		4		8.2
-	75		6		12.6
-	75		8		16.8
-	75		10		21.2
+	75e-2		3		5.9
+	75e-2		4		8.2
+	75e-2		6		12.6
+	75e-2		8		16.8
+	75e-2		10		21.2
 
-	100		3		7.8
-	100		4		10.5
-	100		6		15.7
-	100		8		21.0
-	100		10		26.2
+	100e-2		3		7.8
+	100e-2		4		10.5
+	100e-2		6		15.7
+	100e-2		8		21.0
+	100e-2		10		26.2
 
 	0		5		5.5
 	0		6		6.5
@@ -267,14 +267,14 @@ save("1a_stahl.dat", "stahl_plot");
 # der ``fit.log`` Datei zu finden. Dort werden die Parameter inklusive Fehler
 # angegeben. Die Bezeichnungen der Variablen ist hier und in gnuplot gleich.
 
-alu.mu.val = 1;
-alu.mu.err = 1;
+alu.mu.val = 0.00304354;
+alu.mu.err = 2.16e-05;
 
-kupfer.mu.val = 1;
-kupfer.mu.err = 1;
+kupfer.mu.val = 0.0017504;
+kupfer.mu.err = 9.379e-05;
 
-stahl.mu.val = 1;
-stahl.mu.err = 1;
+stahl.mu.val = 0.00252658;
+stahl.mu.err = 2.184e-05;
 
 ###############################################################################
 #                        Rechnungen mit Fitparametern                         #
@@ -367,7 +367,11 @@ stahl.E.err = sqrt(sumsq([stahl.E.err stahl2.E.err])) / 2;
 #                        Aufgabe 2.a -- Torsionspendel                        #
 ###############################################################################
 
-stahl3_plot = [stahl3.schwingung.val(:, 1) stahl3.schwingung.val(:, 3) ./ stahl3.schwingung.val(:, 2) knickung.err ./ stahl3.schwingung.val(:, 2)];
+x = stahl3.schwingung.val(:, 1).^2;
+y = (stahl3.schwingung.val(:, 3) ./ stahl3.schwingung.val(:, 2)) .^2;
+dy = y ./ stahl3.schwingung.val(:, 2) * periode.err;
+
+stahl3_plot = [x y dy];
 
 save("2a.dat", "stahl3_plot");
 
@@ -378,11 +382,11 @@ save("2a.dat", "stahl3_plot");
 
 # TODO Parameter hier eintragen.
 
-alpha.val = 1;
-alpha.err = 1;
+alpha.val = 1.18864;
+alpha.err = 0.007501;
 
-beta.val = 1;
-beta.err = 1;
+beta.val = 5.6621;
+beta.err = 0.07179;
 
 ###############################################################################
 #                                 Rechnungen                                  #
