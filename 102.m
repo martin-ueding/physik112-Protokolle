@@ -15,27 +15,24 @@
 # TODO Messwerte hier hin.
 
 # Abmessungen der Stäbe [m].
-alu.breite.val = 1;
-alu.dicke.val = 1;
+alu.breite.val = 10.1e-3;
+alu.dicke.val = 2.0e-3;
 
-kupfer.breite.val = 1;
-kupfer.dicke.val = 1;
+kupfer.breite.val = 10.2e-3;
+kupfer.dicke.val = 1.45e-3;
 
-stahl1.breite.val = 1;
-stahl1.dicke.val = 1;
+stahl.breite.val = 10.25e-3;
+stahl.dicke.val = 1.48e-3;
 
-stahl2.breite.val = 1;
-stahl2.dicke.val = 1;
+pvc.breite.val = 20.1e-3;
+pvc.dicke.val = 4.15e-3;
 
-pvc.breite.val = 1;
-pvc.dicke.val = 1;
-
-gfk.breite.val = 1;
-gfk.dicke.val = 1;
+gfk.breite.val = 20.65e-3;
+gfk.dicke.val = 3.2e-3;
 
 # Fehler für Breite und Dickenmessung [m]. Dieser wird später auf alle diese
 # Größen draufgerechnet.
-breite.err = 0.001;
+breite.err = 0.05e-3;
 
 # Länge der Stäbe, wie in der Versuchsanleitung [m]
 laenge.val = 400e-3;
@@ -51,34 +48,36 @@ laenge.err = 0.5e-3;
 # Dies sind die Durchbiegungen. Dabei die Paare als Kraft [N] und Durchbiegung
 # [m] angeben.
 
+# Ortsfaktor [N/kg]
+g = 9.81;
+
 aluminium.durchbiegung.val = [
-   0.391409   0.996575
-   0.704232   0.191150
-   0.027355   0.784342
-   0.096624   0.650735
-   0.882107   0.396150
-   0.827381   0.124268
-   0.362158   0.726542
+	0.050 * g	(12.7 - 11.25) / 10 * 10^-2
+	0.100 * g	(12.7 - 9.7) / 10 * 10^-2
+	0.150 * g	(12.7 - 8.2) / 10 * 10^-2
+	0.200 * g	(12.7 - 6.7) / 10 * 10^-2
+	0.250 * g	(12.7 - 5.2) / 10 * 10^-2
+	0.300 * g	(12.7 - 3.8) / 10 * 10^-2
 ];
 
 kupfer.durchbiegung.val = [
-   0.175852   0.745137
-   0.946310   0.038911
-   0.449856   0.773995
-   0.854179   0.922200
-   0.250783   0.819575
-   0.546821   0.904476
-   0.038243   0.530155
+	0.050 * g	(16 - 15.75) / 10 * 10^-2
+	0.100 * g	(16 - 14.4) / 10 * 10^-2
+	0.150 * g	(16 - 13.6) / 10 * 10^-2
+	0.200 * g	(16 - 12.49) / 10 * 10^-2
+	0.250 * g	(16 - 12.0) / 10 * 10^-2
+	0.300 * g	(16 - 11.25) / 10 * 10^-2
+	0.350 * g	(16 - 10.37) / 10 * 10^-2
 ];
 
-stahl1.durchbiegung.val = [
-   0.48554   0.18709
-   0.52237   0.66030
-   0.21503   0.34866
-   0.85535   0.69202
-   0.99076   0.10359
-   0.59792   0.36683
-   0.74274   0.39041
+stahl.durchbiegung.val = [
+	0.050 * g	(11.75 - 10.6) / 10 * 10^-2
+	0.100 * g	(11.75 - 9.25) / 10 * 10^-2
+	0.150 * g	(11.75 - 8.0) / 10 * 10^-2
+	0.200 * g	(11.75 - 6.9) / 10 * 10^-2
+	0.250 * g	(11.75 - 5.6) / 10 * 10^-2
+	0.300 * g	(11.75 - 4.35) / 10 * 10^-2
+	0.350 * g	(11.75 - 3.1) / 10 * 10^-2
 ];
 
 
@@ -93,37 +92,33 @@ durchbiegung.err = 0.1;
 # TODO Messwerte hier hin.
 
 stahl2.knickung.val = [
-   0.466742   0.053706
-   0.282569   0.870156
-   0.977930   0.297889
-   0.446766   0.854111
-   0.718474   0.967529
-   0.145537   0.085825
-   0.263556   0.280030
+	0 * g		0.99
+	1 * g		1.04
+	2 * g		1.13
+	3 * g		1.67
+	3.1 * g		1.92
+	3.2 * g		2.34
+	3.25 * g	2.69
 ];
 
 pvc.knickung.val = [
-   0.642486   0.947998
-   0.652441   0.730301
-   0.590789   0.336981
-   0.036135   0.301853
-   0.961874   0.491673
-   0.402403   0.552949
-   0.764620   0.909589
-
+	0 * g		0.75
+	2 * g		0.86
+	2.5 * g		1.27
+	2.6 * g		3
 ];
 
 gfk.knickung.val = [
-   0.274635   0.534678
-   0.215914   0.415906
-   0.056233   0.970390
-   0.723662   0.509737
-   0.722620   0.717131
-   0.515478   0.933349
-   0.848369   0.065128
+	0 * g		0.83
+	5 * g		0.89
+	7 * g		1.08
+	7.1 * g		1.17
+	7.3 * g		1.26
+	7.5 * g		1.50
+	7.6 * g		1.86
 ];
 
-knickung.err = 0.1;
+knickung.err = 0.02;
 
 ###############################################################################
 #                                  Messungen                                  #
@@ -136,55 +131,55 @@ knickung.err = 0.1;
 # Anzahl der Perioden und die Dauer [s] angeben.
 
 stahl3.schwingung.val = [
-	25		3		1
-	25		4		1
-	25		6		1
-	25		8		1
-	25		10		1
+	25		3		3.8
+	25		4		4.8
+	25		6		7.4
+	25		8		10.2
+	25		10		12.0
 
-	50		3		1
-	50		4		1
-	50		6		1
-	50		8		1
-	50		10		1
+	50		3		4.8
+	50		4		6.3
+	50		6		9.7
+	50		8		12.9
+	50		10		16.2
 
-	75		3		1
-	75		4		1
-	75		6		1
-	75		8		1
-	75		10		1
+	75		3		5.9
+	75		4		8.2
+	75		6		12.6
+	75		8		16.8
+	75		10		21.2
 
-	100		3		1
-	100		4		1
-	100		6		1
-	100		8		1
-	100		10		1
+	100		3		7.8
+	100		4		10.5
+	100		6		15.7
+	100		8		21.0
+	100		10		26.2
 
-	0		5		1
-	0		6		1
-	0		7		1
-	0		8		1
-	0		9		1
-	0		10		1
-	0		11		1
-	0		12		1
-	0		13		1
-	0		14		1
-	0		15		1
+	0		5		5.5
+	0		6		6.5
+	0		7		7.6
+	0		8		8.7
+	0		9		9.8
+	0		10		11.2
+	0		11		12.0
+	0		12		13.2
+	0		13		14.2
+	0		14		15.1
+	0		15		16.4
 ];
 
 # Der Durchmesser des Stahldrahtes [m].
-stahl3.durchmesser.val = 1;
+stahl3.durchmesser.val = 1.06e-3;
 
 # Und der passende Fehler [m].
-stahl3.durchmesser.err = 1;
+stahl3.durchmesser.err = 0.01e-3;
 
 # Messfehler in der Periode [s].
 periode.err = 0.2;
 
-# Masse der extra Scheiben für das Pendel.
-m.val = 1;
-m.err = 1;
+# Masse der extra Scheiben für das Pendel [kg].
+m.val = 0.1;
+m.err = 0;
 
 ###############################################################################
 #                                 Rechnungen                                  #
@@ -198,8 +193,8 @@ alu.dicke.err = breite.err;
 kupfer.breite.err = breite.err;
 kupfer.dicke.err = breite.err;
 
-stahl1.breite.err = breite.err;
-stahl1.dicke.err = breite.err;
+stahl.breite.err = breite.err;
+stahl.dicke.err = breite.err;
 
 stahl2.breite.err = breite.err;
 stahl2.dicke.err = breite.err;
@@ -213,7 +208,7 @@ gfk.dicke.err = breite.err;
 # Die Länge zuweisen.
 alu.laenge = laenge;
 kupfer.laenge = laenge;
-stahl1.laenge = laenge;
+stahl.laenge = laenge;
 stahl2.laenge = laenge;
 pvc.laenge = laenge;
 gfk.laenge = laenge;
@@ -226,25 +221,20 @@ function material = I_rechteck(material)
 	);
 endfunction
 
-function material = I_kreis(material)
-	material.I.val = 1/4 * pi * material.radius.val^4;
-	material.I.err = abs(pi * material.radius.val^3 * material.radius.err);
-endfunction
-
 alu = I_rechteck(alu);
 kupfer = I_rechteck(kupfer);
-stahl1 = I_rechteck(stahl1);
-stahl2 = I_rechteck(stahl2);
+stahl = I_rechteck(stahl);
+stahl2.I = stahl.I;
 pvc = I_rechteck(pvc);
 gfk = I_rechteck(gfk);
 
 printf("Flächenträgheitsmomente\n");
 printf("\n")
-printf("Aluminium: I = %f ± %f m^4\n", alu.I.val, alu.I.err);
-printf("Kupfer:    I = %f ± %f m^4\n", kupfer.I.val, kupfer.I.err);
-printf("Stahl:     I = %f ± %f m^4\n", stahl1.I.val, stahl1.I.err);
-printf("PVC:       I = %f ± %f m^4\n", pvc.I.val, pvc.I.err);
-printf("GFK:       I = %f ± %f m^4\n", gfk.I.val, gfk.I.err);
+printf("Aluminium: I = %.2e ± %.2e m^4\n", alu.I.val, alu.I.err);
+printf("Kupfer:    I = %.2e ± %.2e m^4\n", kupfer.I.val, kupfer.I.err);
+printf("Stahl:     I = %.2e ± %.2e m^4\n", stahl.I.val, stahl.I.err);
+printf("PVC:       I = %.2e ± %.2e m^4\n", pvc.I.val, pvc.I.err);
+printf("GFK:       I = %.2e ± %.2e m^4\n", gfk.I.val, gfk.I.err);
 printf("\n")
 
 ###############################################################################
@@ -255,12 +245,12 @@ printf("\n")
 # Hier werden die Daten für gnuplot vorbereitet.
 aluminium_plot = [aluminium.durchbiegung.val ones(length(aluminium.durchbiegung.val), 1) * durchbiegung.err];
 kupfer_plot = [kupfer.durchbiegung.val ones(length(kupfer.durchbiegung.val), 1) * durchbiegung.err];
-stahl1_plot = [stahl1.durchbiegung.val ones(length(stahl1.durchbiegung.val), 1) * durchbiegung.err];
+stahl_plot = [stahl.durchbiegung.val ones(length(stahl.durchbiegung.val), 1) * durchbiegung.err];
 
 # Daten speichern.
 save("a_alu.dat", "aluminium_plot");
 save("a_kupfer.dat", "kupfer_plot");
-save("a_stahl1.dat", "stahl1_plot");
+save("a_stahl.dat", "stahl_plot");
 
 ###############################################################################
 #                          Fitparameter aus gnuplot                           #
@@ -279,8 +269,8 @@ alu.mu.err = 1;
 kupfer.mu.val = 1;
 kupfer.mu.err = 1;
 
-stahl1.mu.val = 1;
-stahl1.mu.err = 1;
+stahl.mu.val = 1;
+stahl.mu.err = 1;
 
 ###############################################################################
 #                        Rechnungen mit Fitparametern                         #
@@ -299,13 +289,13 @@ endfunction
 
 alu = elast(alu);
 kupfer = elast(kupfer);
-stahl1 = elast(stahl1);
+stahl = elast(stahl);
 
 printf("Elastizitätsmodule\n");
 printf("\n");
-printf("Aluminium: E = %f ± %f\n", alu.E.val, alu.E.err);
-printf("Kupfer:    E = %f ± %f\n", kupfer.E.val, kupfer.E.err);
-printf("Stahl:     E = %f ± %f\n", stahl1.E.val, stahl1.E.err);
+printf("Aluminium: E = %.2e ± %.2e N/m²\n", alu.E.val, alu.E.err);
+printf("Kupfer:    E = %.2e ± %.2e N/m²\n", kupfer.E.val, kupfer.E.err);
+printf("Stahl:     E = %.2e ± %.2e N/m²\n", stahl.E.val, stahl.E.err);
 printf("\n");
 
 ###############################################################################
@@ -360,13 +350,13 @@ gfk = elast2(gfk);
 
 printf("Elastizitätsmodule\n")
 printf("\n")
-printf("Stahl: E = %f ± %f\n", stahl2.E.val, stahl2.E.err);
-printf("PVC:   E = %f ± %f\n", pvc.E.val, pvc.E.err);
-printf("GFK:   E = %f ± %f\n", gfk.E.val, gfk.E.err);
+printf("Stahl: E = %.2e ± %.2e N/m²\n", stahl2.E.val, stahl2.E.err);
+printf("PVC:   E = %.2e ± %.2e N/m²\n", pvc.E.val, pvc.E.err);
+printf("GFK:   E = %.2e ± %.2e N/m²\n", gfk.E.val, gfk.E.err);
 printf("\n")
 
-stahl.E.val = mean([stahl1.E.val stahl2.E.val]);
-stahl.E.err = sqrt(sumsq([stahl1.E.err stahl2.E.err])) / 2;
+stahl.E.val = mean([stahl.E.val stahl2.E.val]);
+stahl.E.err = sqrt(sumsq([stahl.E.err stahl2.E.err])) / 2;
 
 ###############################################################################
 #                                 Rechnungen                                  #
@@ -390,15 +380,22 @@ alpha.err = 1;
 beta.val = 1;
 beta.err = 1;
 
-D.val = 8 pi^2 m.val / beta.val;
+D.val = 8 * pi^2 * m.val / beta.val;
 D.err = sqrt(
 	(8 * pi^2 / beta.val * m.val)^2
 	+ (8 * pi^2 * m.val / beta.val^2 * beta.err)
 );
 
-Theta_Stange.val = alpha.val * D.val / (4 * pi^2) - 2 Theta_Scheibe;
+# Radius der Zusatzmassen [m], aus der Aufgabenstellung.
+r.val = 15e-3;
+d.val = 16e-3;
+
+Theta_Scheibe.val = m.val * r.val^2 / 4 + m.val * d.val^2 / 12;
+Theta_Scheibe.err = 0;
+
+Theta_Stange.val = alpha.val * D.val / (4 * pi^2) - 2 * Theta_Scheibe.val;
 Theta_Stange.err = sqrt(
 	(D.val / (4 * pi^2) * alpha.err)^2
 	+ (alpha.val / (4 * pi^2) * D.err)^2
-	+ (2 Theta_Scheibe.err)^2
+	+ (2 * Theta_Scheibe.err)^2
 );
