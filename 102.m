@@ -325,14 +325,14 @@ save("1b_gfk.dat", "gfk_plot");
 # TODO Parameter hier eintragen.
 
 # Hier kommen die aus den Plots abgelesenen Werte für die Knicklast rein.
-stahl2.F.val = 1;
-stahl2.F.err = 1;
+stahl2.F.val = 33;
+stahl2.F.err = 5;
 
-pvc.F.val = 1;
-pvc.F.err = 1;
+pvc.F.val = 25;
+pvc.F.err = 5;
 
-gfk.F.val = 1;
-gfk.F.err = 1;
+gfk.F.val = 75;
+gfk.F.err = 5;
 
 ###############################################################################
 #                                 Rechnungen                                  #
@@ -424,5 +424,5 @@ G.err = sqrt(
 
 printf("Schubmodul\n");
 printf("\n");
-printf("G = %.2e ± %.2e N/m²\n", G.val, G.err);
+printf("G = %.2e ± %.2e N/m² (%.2e)\n", G.val, G.err, G.err/G.val);
 printf("\n");
