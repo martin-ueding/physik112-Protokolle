@@ -181,6 +181,10 @@ periode.err = 0.2;
 m.val = 0.1;
 m.err = 0;
 
+# Länge des Drahtes über und unter dem Pendel [m].
+l.val = 15e-2;
+l.err = 1e-2;
+
 ###############################################################################
 #                                 Rechnungen                                  #
 #                           Flächenträgheitsmomente                           #
@@ -248,9 +252,9 @@ kupfer_plot = [kupfer.durchbiegung.val ones(length(kupfer.durchbiegung.val), 1) 
 stahl_plot = [stahl.durchbiegung.val ones(length(stahl.durchbiegung.val), 1) * durchbiegung.err];
 
 # Daten speichern.
-save("a_alu.dat", "aluminium_plot");
-save("a_kupfer.dat", "kupfer_plot");
-save("a_stahl.dat", "stahl_plot");
+save("1a_alu.dat", "aluminium_plot");
+save("1a_kupfer.dat", "kupfer_plot");
+save("1a_stahl.dat", "stahl_plot");
 
 ###############################################################################
 #                          Fitparameter aus gnuplot                           #
@@ -309,9 +313,9 @@ pvc_plot = [pvc.knickung.val ones(length(pvc.knickung.val), 1) * knickung.err];
 gfk_plot = [gfk.knickung.val ones(length(gfk.knickung.val), 1) * knickung.err];
 
 # Daten speichern.
-save("b_stahl2.dat", "stahl2_plot");
-save("b_pvc.dat", "pvc_plot");
-save("b_gfk.dat", "gfk_plot");
+save("1b_stahl2.dat", "stahl2_plot");
+save("1b_pvc.dat", "pvc_plot");
+save("1b_gfk.dat", "gfk_plot");
 
 ###############################################################################
 #                          Fitparameter aus gnuplot                           #
@@ -380,6 +384,11 @@ alpha.err = 1;
 beta.val = 1;
 beta.err = 1;
 
+###############################################################################
+#                                 Rechnungen                                  #
+#                        Aufgabe 2.a -- Torsionspendel                        #
+###############################################################################
+
 D.val = 8 * pi^2 * m.val / beta.val;
 D.err = sqrt(
 	(8 * pi^2 / beta.val * m.val)^2
@@ -388,7 +397,9 @@ D.err = sqrt(
 
 # Radius der Zusatzmassen [m], aus der Aufgabenstellung.
 r.val = 15e-3;
+r.err = 0;
 d.val = 16e-3;
+d.err = 0;
 
 Theta_Scheibe.val = m.val * r.val^2 / 4 + m.val * d.val^2 / 12;
 Theta_Scheibe.err = 0;
@@ -399,3 +410,15 @@ Theta_Stange.err = sqrt(
 	+ (alpha.val / (4 * pi^2) * D.err)^2
 	+ (2 * Theta_Scheibe.err)^2
 );
+
+G.val = l.val / (pi * r.val^4) * D.val;
+G.err = sqrt(
+	(l.val / (pi * r.val^4) * D.err)^2
+	+ (1 / (pi * r.val^4) * D.val * l.err)^2
+	+ (4 * l.val / (pi * r.val^5) * D.val * r.err)^2
+);
+
+printf("Schubmodul\n");
+printf("\n");
+printf("G = %.2e ± %.2e N/m²\n", G.val, G.err);
+printf("\n");
