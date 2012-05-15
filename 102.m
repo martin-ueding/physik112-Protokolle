@@ -447,7 +447,7 @@ part2 = 1 / (pi * stahl3.radius.val^4) * D.val * l.err;
 part3 = 4 * l.val / (pi * stahl3.radius.val^5) * D.val * stahl3.radius.err;
 G.err = sqrt(part1^2 + part2^2 + part3^2);
 
-printf("Schubmodul\n");
+printf("Schubmodul für Torsionspendel\n");
 printf("\n");
 printf("r        = %.2e ± %.2e m      (%.1e)\n", stahl3.radius.val, stahl3.radius.err, stahl3.radius.err/stahl3.radius.val);
 printf("D        = %.2e ± %.2e Nm/rad (%.1e)\n", D.val, D.err, D.err/D.val);

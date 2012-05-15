@@ -31,11 +31,11 @@ fit f5(x) "1a_stahl.dat" using 1:2:3 via e,f
 
 # Plot the data with the fit.
 plot "1a_alu.dat" with yerrorbars lc rgb "#000000" title "Aluminium", \
-	 "1a_kupfer.dat" with yerrorbars lc rgb "#000000" title "Kupfer", \
-	 "1a_stahl.dat" with yerrorbars lc rgb "#000000" title "Stahl", \
-	 f1(x) lc rgb "#000000" title "Fit für Aluminium", \
-	 f3(x) lc rgb "#000000" title "Fit für Kupfer", \
-	 f5(x) lc rgb "#000000" title "Fit für Stahl"
+		 "1a_kupfer.dat" with yerrorbars lc rgb "#000000" title "Kupfer", \
+		 "1a_stahl.dat" with yerrorbars lc rgb "#000000" title "Stahl", \
+		 f1(x) lc rgb "#000000" title "Fit für Aluminium", \
+		 f3(x) lc rgb "#000000" title "Fit für Kupfer", \
+		 f5(x) lc rgb "#000000" title "Fit für Stahl"
 
 # Set the output again so that the PDF is really written to.
 set output
@@ -60,8 +60,11 @@ set title "physik111 Versuch 102: Aufgabe 1.b"
 
 # Plot the data with the fit.
 plot "1b_stahl2.dat" with yerrorbars lc rgb "#000000" title "Stahl", \
-	 "1b_pvc.dat" with yerrorbars lc rgb "#000000" title "PVC", \
-	 "1b_gfk.dat" with yerrorbars lc rgb "#000000" title "GFK"
+		 "" with lines lc rgb "#000000", \
+		 "1b_pvc.dat" with yerrorbars lc rgb "#000000" title "PVC", \
+		 "" with lines lc rgb "#000000", \
+		 "1b_gfk.dat" with yerrorbars lc rgb "#000000" title "GFK", \
+		 "" with lines lc rgb "#000000"
 
 # Set the output again so that the PDF is really written to.
 set output
@@ -90,7 +93,7 @@ fit T(x) "2a.dat" using 1:2:3 via alpha,beta
 
 # Plot the data with the fit.
 plot "2a.dat" with yerrorbars lc rgb "#000000" title "Torsionspendel", \
-	T(x) lc rgb "#000000" title "Fit"
+		 T(x) lc rgb "#000000" title "Fit"
 
 # Set the output again so that the PDF is really written to.
 set output
