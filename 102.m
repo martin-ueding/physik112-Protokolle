@@ -131,29 +131,29 @@ knickung.err = 0.02;
 # Anzahl der Perioden und die Dauer [s] angeben.
 
 stahl3.schwingung.val = [
-	25e-2		3		3.8
-	25e-2		4		4.8
-	25e-2		6		7.4
-	25e-2		8		10.2
-	25e-2		10		12.0
+	25e-3		3		3.8
+	25e-3		4		4.8
+	25e-3		6		7.4
+	25e-3		8		10.2
+	25e-3		10		12.0
 
-	50e-2		3		4.8
-	50e-2		4		6.3
-	50e-2		6		9.7
-	50e-2		8		12.9
-	50e-2		10		16.2
+	50e-3		3		4.8
+	50e-3		4		6.3
+	50e-3		6		9.7
+	50e-3		8		12.9
+	50e-3		10		16.2
 
-	75e-2		3		5.9
-	75e-2		4		8.2
-	75e-2		6		12.6
-	75e-2		8		16.8
-	75e-2		10		21.2
+	75e-3		3		5.9
+	75e-3		4		8.2
+	75e-3		6		12.6
+	75e-3		8		16.8
+	75e-3		10		21.2
 
-	100e-2		3		7.8
-	100e-2		4		10.5
-	100e-2		6		15.7
-	100e-2		8		21.0
-	100e-2		10		26.2
+	100e-3		3		7.8
+	100e-3		4		10.5
+	100e-3		6		15.7
+	100e-3		8		21.0
+	100e-3		10		26.2
 
 	0			5		5.5
 	0			6		6.5
@@ -309,11 +309,11 @@ stahl.mu.err = 2.184e-05;
 
 # Elastizitätsmodul ausrechnen.
 function mat = elast(mat)
-	mat.E.val = mat.laenge.val^3 / (mat.mu.val * mat.I.val);
+	mat.E.val = mat.laenge.val^3 / (mat.mu.val * mat.I.val * 48);
 	mat.E.err = sqrt(
-		(3 * mat.laenge.val^2 / (mat.mu.val * mat.I.val) * mat.laenge.err)^2
-		+ (mat.laenge.val^3 / (mat.mu.val^2 * mat.I.val) * mat.mu.err)^2
-		+ (mat.laenge.val^3 / (mat.mu.val * mat.I.val^2) * mat.I.err)^2
+		(3 * mat.laenge.val^2 / (mat.mu.val * mat.I.val * 48) * mat.laenge.err)^2
+		+ (mat.laenge.val^3 / (mat.mu.val^2 * mat.I.val * 48) * mat.mu.err)^2
+		+ (mat.laenge.val^3 / (mat.mu.val * mat.I.val^2 * 48) * mat.I.err)^2
 	);
 endfunction
 
@@ -411,8 +411,8 @@ save("2a.dat", "stahl3_plot");
 alpha.val = 1.18864;
 alpha.err = 0.007501;
 
-beta.val = 5.6621;
-beta.err = 0.07179;
+beta.val = 566.21;
+beta.err = 7.179;
 
 ###############################################################################
 #                                 Rechnungen                                  #
