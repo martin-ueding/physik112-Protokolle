@@ -169,7 +169,7 @@ stahl3.schwingung.val = [
 ];
 
 # Der Durchmesser des Stahldrahtes [m]. Umgerechnet auf einen Radius.
-stahl3.radius.val = 1.06e-3 / 2;
+stahl3.radius.val = 0.6e-3 / 2;
 
 # Und der passende Fehler [m].
 stahl3.radius.err = 0.01e-3 / 2;
@@ -385,8 +385,12 @@ printf("PVC:   E = %.2e ± %.2e N/m² (%.1e) [%.1e]\n", pvc.E.val, pvc.E.err, pv
 printf("GFK:   E = %.2e ± %.2e N/m² (%.1e) [%.1e]\n", gfk.E.val, gfk.E.err, gfk.E.err/gfk.E.val, epsilon(gfk.E));
 printf("\n")
 
-stahl.E.val = mean([stahl.E.val stahl2.E.val]);
-stahl.E.err = sqrt(sumsq([stahl.E.err stahl2.E.err])) / 2;
+stahl3.E.val = mean([stahl.E.val stahl2.E.val]);
+stahl3.E.err = sqrt(sumsq([stahl.E.err stahl2.E.err])) / 2;
+stahl3.E.lit = stahl.E.lit;
+
+printf("Σ Stahl: E = %.2e ± %.2e N/m² (%.1e) [%.1e]\n", stahl3.E.val, stahl3.E.err, stahl3.E.err/stahl3.E.val, epsilon(stahl3.E));
+printf("\n")
 
 ###############################################################################
 #                                 Rechnungen                                  #
@@ -422,7 +426,7 @@ beta.err = 7.179;
 D.val = 8 * pi^2 * m.val / beta.val;
 D.err = sqrt(
 	(8 * pi^2 / beta.val * m.err)^2
-	+ (8 * pi^2 * m.val / beta.val^2 * beta.err)
+	+ (8 * pi^2 * m.val / beta.val^2 * beta.err)^2
 );
 
 # Radius der Zusatzmassen [m], aus der Aufgabenstellung.
