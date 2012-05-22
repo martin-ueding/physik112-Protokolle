@@ -5,6 +5,22 @@
 #                  physik111 Versuch 108 „Trägheitsmoment“                    #
 ###############################################################################
 
+###############################################################################
+#                                   License                                   #
+###############################################################################
+#
+# This GNU Octave script is free software: you can redistribute it and/or
+# modify it under the terms of the GNU General Public License as published by
+# the Free Software Foundation, either version 2 of the License, or (at your
+# option) any later version.
+#
+# This is distributed in the hope that it will be useful, but WITHOUT ANY
+# WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR
+# A PARTICULAR PURPOSE. See the GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License along with
+# this. If not, see <http://www.gnu.org/licenses/>.
+
 I_theo = 0.0084891;
 
 ###############################################################################
@@ -13,7 +29,7 @@ I_theo = 0.0084891;
 
 # Struktur der Spalten in ``data``:
 #
-# Masse Radius Fallhöhe Fallzeit Umläufe Umlaufszeit
+# Masse [g], Radius [cm], Fallhöhe [cm], Fallzeit [s], Umläufe, Umlaufszeit [s]
 load "data.dat"
 
 # Zerlege die Datentabelle in einzelne Spaltenvektoren.
@@ -36,17 +52,22 @@ omega = 2 * pi ./ perioden;
 #                             Energiesatz Methode                             #
 ###############################################################################
 
+# Definiere Listen, die gleich gefüllt werden.
 list_25_25 = [];
 list_25_100 = [];
 list_50_25 = [];
 list_50_100 = [];
 
+# Gehe alle Daten durch, und fülle in die entsprechenden Listen ein, je nach
+# Masse und Radius getrennt.
 for n = 1:length(massen)
 	x = omega(n)^2;
 	y = hoehen(n) / 100;
 
+	# Kombiniere zu einem Punkt.
 	p = [x, y];
 	
+	# Sortiere den Punkt in die entsprechende Liste ein.
 	if (massen(n) == 25)
 		if (radien(n) == 10)
 			list_25_100 = [list_25_100 ; p];
@@ -74,8 +95,10 @@ function result = handleB(list, m, r)
 
 	# Geradenanpassung
 	mu = cov(x, y) / var(x);
+	printf("Energie: μ(m=%.2e, r=%.2e) = %.2e\n", m, r, mu);
 
 	I = m * (2 * 9.81 * mu - r^2);
+	printf("Energie: I(m=%.2e, r=%.2e) = %.2e\n", m, r, I);
 
 	result = [I];
 endfunction
@@ -130,8 +153,10 @@ function result = handleC(list, m, r)
 
 	# Geradenanpassung
 	mu = cov(x, y) / var(x);
+	printf("Drehmoment: μ(m=%.2e, r=%.2e) = %.2e\n", m, r, mu);
 
 	I = m * (9.81 * mu - r) * r;
+	printf("Drehmoment: I(m=%.2e, r=%.2e) = %.2e\n", m, r, I);
 
 	result = [I];
 endfunction
