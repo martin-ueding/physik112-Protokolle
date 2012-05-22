@@ -38,20 +38,20 @@ f25_100(x) = c * x + d;
 f50_25(x) = e * x + f;
 f50_100(x) = g * x + h;
 
-fit f25_25(x) "108b_25_25.dat" using 1:2 via a,b
+fit f25_25(x)  "108b_25_25.dat"  using 1:2 via a,b
 fit f25_100(x) "108b_25_100.dat" using 1:2 via c,d
-fit f50_25(x) "108b_50_25.dat" using 1:2 via e,f
+fit f50_25(x)  "108b_50_25.dat"  using 1:2 via e,f
 fit f50_100(x) "108b_50_100.dat" using 1:2 via g,h
 
 # Plot the data with the fit.
-plot "108b_25_25.dat" title "25 g, 2.5 cm", \
-	 "108b_25_100.dat" title "25 g, 10 cm", \
-	 "108b_50_25.dat" title "50 g, 2.5 cm", \
-	 "108b_50_100.dat" title "50 g, 10 cm", \
-	 f25_25(x) title "Fit 25 g, 2.5 cm", \
-	 f25_100(x) title "Fit 25 g, 10 cm", \
-	 f50_25(x) title "Fit 50 g, 2.5 cm", \
-	 f50_100(x) title "Fit 50 g, 10 cm"
+plot "108b_25_25.dat"  lc rgb "#000000" with yerrorbars title "25 g, 2.5 cm", \
+	 "108b_25_100.dat" lc rgb "#000000" with yerrorbars title "25 g, 10 cm", \
+	 "108b_50_25.dat"  lc rgb "#000000" with yerrorbars title "50 g, 2.5 cm", \
+	 "108b_50_100.dat" lc rgb "#000000" with yerrorbars title "50 g, 10 cm", \
+	 f25_25(x) lc rgb "#000000"  title "Fit 25 g, 2.5 cm", \
+	 f25_100(x) lc rgb "#000000" title "Fit 25 g, 10 cm", \
+	 f50_25(x) lc rgb "#000000"  title "Fit 50 g, 2.5 cm", \
+	 f50_100(x) lc rgb "#000000" title "Fit 50 g, 10 cm"
 
 # Set the output again so that the PDF is really written to.
 set output
@@ -72,27 +72,27 @@ set ylabel "Fallzeit [s]"
 set grid
 
 # Set the title of the whole graph.
-set title "physik111 Versuch 108: Aufgabe 108.b"
+set title "physik111 Versuch 108: Aufgabe 108.c"
 
 g25_25(x) = a * x + b;
 g25_100(x) = c * x + d;
 g50_25(x) = e * x + f;
 g50_100(x) = g * x + h;
 
-fit g25_25(x) "108c_25_25.dat" using 1:2 via a,b
-fit g25_100(x) "108c_25_100.dat" using 1:2 via c,d
-fit g50_25(x) "108c_50_25.dat" using 1:2 via e,f
-fit g50_100(x) "108c_50_100.dat" using 1:2 via g,h
+fit g25_25(x)  "108c_25_25.dat"  using 1:2:3 via a,b
+fit g25_100(x) "108c_25_100.dat" using 1:2:3 via c,d
+fit g50_25(x)  "108c_50_25.dat"  using 1:2:3 via e,f
+fit g50_100(x) "108c_50_100.dat" using 1:2:3 via g,h
 
 # Plot the data with the fit.
-plot "108c_25_25.dat" title "25 g, 2.5 cm", \
-	 "108c_25_100.dat" title "25 g, 10 cm", \
-	 "108c_50_25.dat" title "50 g, 2.5 cm", \
-	 "108c_50_100.dat" title "50 g, 10 cm", \
-	 g25_25(x) title "Fit 25 g, 2.5 cm", \
-	 g25_100(x) title "Fit 25 g, 10 cm", \
-	 g50_25(x) title "Fit 50 g, 2.5 cm", \
-	 g50_100(x) title "Fit 50 g, 10 cm"
+plot "108c_25_25.dat"  lc rgb "#000000" with yerrorbars title "25 g, 2.5 cm", \
+	 "108c_25_100.dat" lc rgb "#000000" with yerrorbars title "25 g, 10 cm", \
+	 "108c_50_25.dat"  lc rgb "#000000" with yerrorbars title "50 g, 2.5 cm", \
+	 "108c_50_100.dat" lc rgb "#000000" with yerrorbars title "50 g, 10 cm", \
+	 g25_25(x) lc rgb "#000000" title "Fit 25 g, 2.5 cm", \
+	 g25_100(x) lc rgb "#000000" title "Fit 25 g, 10 cm", \
+	 g50_25(x) lc rgb "#000000" title "Fit 50 g, 2.5 cm", \
+	 g50_100(x) lc rgb "#000000" title "Fit 50 g, 10 cm"
 
 # Set the output again so that the PDF is really written to.
 set output

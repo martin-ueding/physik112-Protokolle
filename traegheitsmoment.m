@@ -23,6 +23,9 @@
 
 I_theo = 0.0084891;
 
+# Fehler in der Zeitbestimmung [s].
+Delta_T = 0.2;
+
 ###############################################################################
 #                                 Daten laden                                 #
 ###############################################################################
@@ -47,6 +50,8 @@ umlaufzeit = data(:, 6);
 perioden = umlaufzeit ./ umlaeufe;
 
 omega = 2 * pi ./ perioden;
+
+Delta_Omega = 2 * pi ./ (perioden.^2) * Delta_T;
 
 ###############################################################################
 #                             Energiesatz Methode                             #
@@ -123,8 +128,9 @@ list_50_100 = [];
 for n = 1:length(massen)
 	x = omega(n);
 	y = fallzeiten(n);
+	dy = Delta_T;
 
-	p = [x, y];
+	p = [x, y, dy];
 	
 	if (massen(n) == 25)
 		if (radien(n) == 10)
