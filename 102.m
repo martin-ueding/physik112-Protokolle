@@ -1,6 +1,22 @@
 #!/usr/bin/octave -fq
 # Copyright © 2012 Martin Ueding <dev@martin-ueding.de>
 
+###############################################################################
+#                                   License                                   #
+###############################################################################
+#
+# This GNU Octave script is free software: you can redistribute it and/or
+# modify it under the terms of the GNU General Public License as published by
+# the Free Software Foundation, either version 2 of the License, or (at your
+# option) any later version.
+#
+# This is distributed in the hope that it will be useful, but WITHOUT ANY
+# WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR
+# A PARTICULAR PURPOSE. See the GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License along with
+# this. If not, see <http://www.gnu.org/licenses/>.
+
 # Versuch 102
 
 # In diesem Programm müssen zum einen die Messwerte selbst eingetragen werden.
@@ -90,6 +106,12 @@ durchbiegung.err = 0.1e-3;
 ###############################################################################
 
 # TODO Messwerte hier hin.
+
+# Die Knickungen der Stäbe. Dabei ist die erste Spalte die Last in [N]. Mit dem
+# Faktor ``g`` kann diese von kg in N umgerechnet werden. Die zweite Spalte ist
+# die Durchbiegung in den Skaleneinheiten der Messschraube. Die Einheiten sind
+# allerdings eh egal, weil ja nur die kritische Knicklast aus dem Plot bestimmt
+# wird.
 
 stahl2.knickung.val = [
 	0 * g		0.99
