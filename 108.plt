@@ -44,10 +44,10 @@ fit f50_25(x)  "108b_50_25.dat"  using 1:2 via e,f
 fit f50_100(x) "108b_50_100.dat" using 1:2 via g,h
 
 # Plot the data with the fit.
-plot "108b_25_25.dat"  lc rgb "#000000" with yerrorbars title "25 g, 2.5 cm", \
-	 "108b_25_100.dat" lc rgb "#000000" with yerrorbars title "25 g, 10 cm", \
-	 "108b_50_25.dat"  lc rgb "#000000" with yerrorbars title "50 g, 2.5 cm", \
-	 "108b_50_100.dat" lc rgb "#000000" with yerrorbars title "50 g, 10 cm", \
+plot "108b_25_25.dat"  lc rgb "#000000" title "25 g, 2.5 cm", \
+	 "108b_25_100.dat" lc rgb "#000000" title "25 g, 10 cm", \
+	 "108b_50_25.dat"  lc rgb "#000000" title "50 g, 2.5 cm", \
+	 "108b_50_100.dat" lc rgb "#000000" title "50 g, 10 cm", \
 	 f25_25(x) lc rgb "#000000"  title "Fit 25 g, 2.5 cm", \
 	 f25_100(x) lc rgb "#000000" title "Fit 25 g, 10 cm", \
 	 f50_25(x) lc rgb "#000000"  title "Fit 50 g, 2.5 cm", \
