@@ -1,0 +1,83 @@
+<!doctype html>
+<!--
+Copyright © 2012 Martin Ueding <dev@martin-ueding.de>
+
+This program is free software: you can redistribute it and/or modify it under
+the terms of the GNU General Public License as published by the Free Software
+Foundation, either version 2 of the License, or (at your option) any later
+version.
+
+This program is distributed in the hope that it will be useful, but WITHOUT ANY
+WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A
+PARTICULAR PURPOSE. See the GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License along with
+this program. If not, see <http://www.gnu.org/licenses/>.
+-->
+<html>
+	<head>
+		<script type="text/javascript">
+
+			function auswertung() {
+				var bins = [];
+				var text = document.formular.messung.value;
+				var lines = text.split('\n');
+				for (var i = 0; i < lines.length; i++) {
+					var line = lines[i];
+					for (var j = 0; j < 100; j++)
+						line= line.replace("  ", " ");
+
+					var parts = line.split("\t");
+					var counts = parts[2];
+					if (bins[counts] == undefined)
+						bins[counts] = 0;
+					bins[counts]++;
+				}
+
+				var keys = [];
+				for (var i in bins)
+					keys.push(i);
+
+				keys.sort();
+
+				document.write("<table border='1'><tr><th>Zerfaelle</th><th>Anzahl</th></tr>");
+				for (var key in keys) {
+					var i = keys[key];
+					document.write("<tr>");
+					document.write("<td>");
+					document.write(i);
+					document.write("</td>");
+					document.write("<td>");
+					document.write(bins[i]);
+					document.write("</td>");
+					document.write("</tr>");
+				}
+				document.write("</table>");
+			}
+
+		</script>
+	</head>
+	<body>
+
+		<h1>Histrogamm Generator f&uuml;r Versuch 130 (Teil 1)</h1>
+
+		<p>
+		Hier die Messdaten von dem ST-350 Programm reinkopieren und auf
+		"auswerten" dr&uuml;cken.
+		</p>
+
+		<p>
+		Copyright &copy; 2012 Martin Ueding (<code>mu@uni-bonn.de</code>)
+		</p>
+
+		<p>
+		Dieses Programm steht unter der GPLv2+ (GNU Public License, Version 2
+		oder sp&auml;ter).
+		</p>
+
+		<form name="formular">
+			<textarea name="messung" rows="30" cols="80"></textarea>
+			<input type="button" onclick="auswertung(); false;" value="auswerten">
+		</form>
+	</body>
+</html>
