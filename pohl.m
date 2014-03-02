@@ -1,14 +1,30 @@
 #!/usr/bin/octave -fq
 # Copyright © 2012 Martin Ueding <dev@martin-ueding.de>
 
+###############################################################################
+#                                   License                                   #
+###############################################################################
+#
+# This GNU Octave script is free software: you can redistribute it and/or
+# modify it under the terms of the GNU General Public License as published by
+# the Free Software Foundation, either version 2 of the License, or (at your
+# option) any later version.
+#
+# This is distributed in the hope that it will be useful, but WITHOUT ANY
+# WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR
+# A PARTICULAR PURPOSE. See the GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License along with
+# this. If not, see <http://www.gnu.org/licenses/>.
+
 # physik111 Versuch 106
 
 ###############################################################################
 #                           Messwerte Aufgabe 106.a                           #
 ###############################################################################
 
-# Liste der Eigenfrequenzen. Als Paare von `Dauer / Anzahl` eingeben. [s]
-nu_0.list = [36.00 35.97 36.53 36.63] / 20;
+# Liste der Eigenfrequenzen. Als Paare von `Dauer / Anzahl` eingeben. [Hz]
+nu_0.list = 20 ./ [36.00 35.97 36.53 36.63];
 
 ###############################################################################
 #                           Messwerte Aufgabe 106.b                           #
