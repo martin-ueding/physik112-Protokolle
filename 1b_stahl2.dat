@@ -1,0 +1,12 @@
+# Created by Octave 3.2.4, Thu May 17 14:29:36 2012 CEST <mu@Martin-HP>
+# name: stahl2_plot
+# type: matrix
+# rows: 7
+# columns: 3
+ 0 0.99 0.02
+ 9.81 1.04 0.02
+ 19.62 1.13 0.02
+ 29.43 1.67 0.02
+ 30.411 1.92 0.02
+ 31.392 2.34 0.02
+ 31.8825 2.69 0.02

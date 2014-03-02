@@ -1,0 +1,9 @@
+# Created by Octave 3.2.4, Tue May 15 17:53:04 2012 CEST <mu@Martin-Eee>
+# name: pvc_plot
+# type: matrix
+# rows: 4
+# columns: 3
+ 0 0.75 0.02
+ 19.62 0.86 0.02
+ 24.525 1.27 0.02
+ 25.506 3 0.02
