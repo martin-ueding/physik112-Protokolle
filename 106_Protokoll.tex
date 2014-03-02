@@ -1,0 +1,384 @@
+% Copyright (c) 2012 Martin Ueding <dev@martin-ueding.de>
+%
+% vim: spelllang=de
+\documentclass[11pt]{article}
+\usepackage[T1]{fontenc}
+\usepackage[a4paper, left=3cm, right=2cm, top=2cm, bottom=2cm]{geometry}
+\usepackage[activate]{pdfcprot}
+\usepackage[ngerman]{babel}
+\usepackage[parfill]{parskip}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{color}
+\usepackage{epstopdf}
+\usepackage{graphicx}
+\usepackage{hyperref}
+\usepackage{setspace}
+\usepackage{units}
+
+\definecolor{darkblue}{rgb}{0,0,.5}
+\hypersetup{pdftex=true, colorlinks=true, breaklinks=false, linkcolor=black, menucolor=black, pagecolor=black, urlcolor=darkblue}
+
+\setlength{\columnsep}{2cm}
+
+\newcommand{\arcsinh}{\mathrm{arcsinh}}
+\newcommand{\asinh}{\mathrm{arcsinh}}
+\newcommand{\ergebnis}{\textcolor{red}{\mathrm{Ergebnis}}}
+\newcommand{\fehlt}{\textcolor{red}{Hier fehlen noch Inhalte.}}
+\newcommand{\half}{\frac{1}{2}}
+\renewcommand{\d}{\, \mathrm d}
+
+\title{physik112 Versuch 106 \\ freie und erzwungene Schwingungen mit Dämpfung}
+\author{Martin Ueding}
+
+\begin{document}
+
+\maketitle
+
+\section{Einleitung}
+
+Anhand des Pohlschen Drehpendels untersuchen wir das physikalisch bedeutende
+Phänomen der freien und erzwungenen Schwingungen mit Dämpfung. Dabei wollen wir
+besonders das Phänomen Resonanz beobachten.
+
+\section{Theorie}
+
+Das Drehpendel besteht aus einem Schwingkörper mit einem Trägheitsmoment $I$
+und einer Spiralfeder mit einem Richtmoment $D$. Für den ungedämpften Fall
+lautet die Bewegungsgleichung also:
+\[ I \ddot{\phi} + D \phi = 0 \]
+
+Dies können wir auch mit der Eigenfrequenz schreiben als:
+\[ \ddot{\phi} + \omega_0^2 \phi = 0 \]
+
+Nun kommt noch die Dämpfung hinzu, die hier durch eine Wirbelstrombremse
+realisiert ist:
+\[ \ddot{\phi} + 2 \beta \dot{\phi} + \omega_0^2 \phi = 0 \]
+
+Diese Bewegungsgleichung wird für leichte Dämpfung gelöst durch:
+\[ \phi(t) = \exp(-\beta t) \exp(i \omega t) \]
+
+Dabei ist $\omega$, die neue Winkelgeschwindigkeit, definiert als:
+\[ \omega = \sqrt{\omega_0^2 - \beta^2} \] 
+
+In diesem Versuch kommt auch ein externer Treiber zum Einsatz. Dadurch ist das
+Kräftegleichgewicht aufgehoben und wir erhalten:
+\[ \ddot{\phi} + 2 \beta \dot{\phi} + \omega_0^2 \phi = \mu \cos(\omega t) \]
+
+Dabei ist $\omega$ die erzwungene Winkelgeschwindigkeit durch den Treiber. Nach
+der Einschwingphase wird das System diese äußere Frequenz annehmen.
+
+Ist die erzwungene Frequenz $\omega$ nahe an der Eigenfrequenz $\omega_0$, so
+kommt es zu einer Resonanz. Das System schaukelt sich so weit auf, wie die
+Dämpfung die Energie schluckt, die vom Treiber in das System gegeben wird. Die
+Güte $Q = \omega_0 / 2 \beta$ gibt an, um wie viel höher die Amplitude des
+Systems im Vergleich zur Treiberamplitude ist.
+
+\section{Aufgaben}
+
+\subsection{Aufgabe 106.A}
+
+Die Maßeinheit des Amplitudenquadrats $\phi^2$ ist die Einheit, in der man den
+Winkel misst, zum Quadrat. Wählt man die willkürlichen Einheiten auf der Skala
+so hat man diese Einheit in Quadrat. Misst man den Winkel, so hat man
+$\unit{rad}^2$.
+
+\section{Aufbau und Durchführung}
+
+\subsection{Aufbau}
+
+Wir haben ein Drehpendel mit einer Schneckenfeder, die mit einem rückteibenden
+Drehmoment auf den Drehkörper wirkt. Der Drehkörper kann durch eine
+Wirbelstrombremse gebremst werden, dabei kann der Bremsstrom eingestellt
+werden. Ein Motor ist noch mit der Feder verbunden und kann so ein zusätzliches
+Drehmoment auf das Pendel legen. Damit lässt sich eine bestimmte Frequenz
+vorgeben und die Resonanz beobachten.
+
+Zeichnung: \fehlt
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%                                Durchführung                                %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{Durchführung}
+
+\subsubsection{Eigenfrequenz (Aufgabe 106.a)}
+\label{a_durchführung}
+
+Wir sollen die Eigenfrequenz $\omega_0$  für den ungedämpften Fall bestimmen.
+Dazu schalten wir die Wirbelstrombremse aus. Wir ziehen das Pendel aus der
+Ruhelage auf eine Amplitude und lassen es dort los. Dabei achten wir darauf,
+dem Pendel keinen „Schubs“ zu geben. Wir zählen die Perioden und messen die
+Gesamtzeit mit der Stoppuhr.
+
+\begin{tabular}{cccr}
+	Messung & Perioden & Gesamtdauer & Kommentar \\
+	\hline
+	1 & $\ergebnis$ & $\ergebnis$ \\
+	2 & $\ergebnis$ & $\ergebnis$ \\
+	3 & $\ergebnis$ & $\ergebnis$ \\
+  \vdots & \vdots & \vdots \\
+\end{tabular}
+
+Diese Daten werte ich in §\ref{a_auswertung} aus.
+
+\subsubsection{Dämpfung (Aufgabe 106.b)}
+\label{b_durchführung}
+
+Wir sollen für drei verschiedene Dämpfungsstärken die abklingenden Amplituden
+messen. Wir stellen die Dämpfung so ein, dass der entsprechende Strom fließt.
+Dann lenken wir das Pendel aus und notieren nach jeder Schwingung, wie groß die
+Amplitude noch ist.
+
+\paragraph{Spulenstrom $\unit[0.1] A$}
+
+Wir messen mit einem Spulenstrom von $\unit[0.1] A$.
+
+\begin{tabular}{ccr}
+	Schwingung & Amplitude $\phi_n$ & Kommentar \\
+	\hline
+	0 & $\ergebnis$ \\
+	1 & $\ergebnis$ \\
+	2 & $\ergebnis$ \\
+	3 & $\ergebnis$ \\
+	4 & $\ergebnis$ \\
+	5 & $\ergebnis$ \\
+	6 & $\ergebnis$ \\
+	7 & $\ergebnis$ \\
+	8 & $\ergebnis$ \\
+	9 & $\ergebnis$ \\
+	10 & $\ergebnis$ \\
+	11 & $\ergebnis$ \\
+	12 & $\ergebnis$ \\
+	13 & $\ergebnis$ \\
+	14 & $\ergebnis$ \\
+	15 & $\ergebnis$ \\
+\end{tabular}
+
+\paragraph{Spulenstrom $\unit[0.3] A$}
+
+Wir messen mit einem Spulenstrom von $\unit[0.3] A$.
+
+\begin{tabular}{ccr}
+	Schwingung & Amplitude $\phi_n$ & Kommentar \\
+	\hline
+	0 & $\ergebnis$ \\
+	1 & $\ergebnis$ \\
+	2 & $\ergebnis$ \\
+	3 & $\ergebnis$ \\
+	4 & $\ergebnis$ \\
+	5 & $\ergebnis$ \\
+	6 & $\ergebnis$ \\
+	7 & $\ergebnis$ \\
+	8 & $\ergebnis$ \\
+	9 & $\ergebnis$ \\
+	10 & $\ergebnis$ \\
+	11 & $\ergebnis$ \\
+	12 & $\ergebnis$ \\
+	13 & $\ergebnis$ \\
+	14 & $\ergebnis$ \\
+	15 & $\ergebnis$ \\
+\end{tabular}
+
+\paragraph{Spulenstrom $\unit[0.5] A$}
+
+Wir messen mit einem Spulenstrom von $\unit[0.5] A$.
+
+\begin{tabular}{ccr}
+	Schwingung & Amplitude $\phi_n$ & Kommentar \\
+	\hline
+	0 & $\ergebnis$ \\
+	1 & $\ergebnis$ \\
+	2 & $\ergebnis$ \\
+	3 & $\ergebnis$ \\
+	4 & $\ergebnis$ \\
+	5 & $\ergebnis$ \\
+	6 & $\ergebnis$ \\
+	7 & $\ergebnis$ \\
+	8 & $\ergebnis$ \\
+	9 & $\ergebnis$ \\
+	10 & $\ergebnis$ \\
+	11 & $\ergebnis$ \\
+	12 & $\ergebnis$ \\
+	13 & $\ergebnis$ \\
+	14 & $\ergebnis$ \\
+	15 & $\ergebnis$ \\
+\end{tabular}
+
+Diese Daten werte ich in §\ref{c_auswertung} aus.
+
+\subsubsection{Motorfrequenz (Aufgabe 106.d)}
+\label{d_durchführung}
+
+Wir ermitteln den Zusammenhang zwischen der Frequenz des Exzenters und der
+Motorspannung.
+
+Dazu wählen wir vier geeignete Frequenzen zwischen $\unit[0.1]{Hz}$ und
+$\unit[1]{Hz}$ und stoppen die Zeit für mindestens 10 Umdrehungen. Die Spannung
+lesen wir vom Voltmeter ab, das in der Spannungsversorgung verbaut ist.
+
+\begin{tabular}{cccr}
+	Spannung & Umdrehungen & Zeit & Kommentar \\
+	\hline
+	$\ergebnis$ & $\ergebnis$ & $\ergebnis$ & \\
+	$\ergebnis$ & $\ergebnis$ & $\ergebnis$ & \\
+	$\ergebnis$ & $\ergebnis$ & $\ergebnis$ & \\
+	$\ergebnis$ & $\ergebnis$ & $\ergebnis$ & \\
+\end{tabular}
+
+Diese Daten werte ich in §\ref{d_auswertung} aus.
+
+\subsubsection{Resonanz (Aufgabe 106.e)}
+\label{e_durchführung}
+
+Wir messen für zwei verschiedene Dämpfungsströme, einmal $\unit[0.3]A$ und
+einmal $\unit[0.5]A$. Dabei messen wir zuerst mit der starken Dämpfung, da dort
+die Resonanzkurve breiter ist und wir nicht Gefahr laufen, sie zu verpassen.
+Dann können wir bei der zweiten Messung mit weniger Dämpfung die Resonanzkurve
+besser auflösen, da wir dann wissen, wo das Maximum ist.
+
+Für einen einzelnen Messpunkt stellen wir eine Spannung am Motor ein. Dann
+warten wir, bis sich das System ausreichend eingeschwungen hat, also der
+stationäre Zustand erreicht ist. Dann bestimmen wir die Maximalamplitude.
+
+\paragraph{starke Dämpfung}
+
+Wir messen mit dem Dämpfungsstrom auf $\unit[0.5]A$.
+
+\begin{tabular}{ccccr}
+	Motorspannung [$\unit V$] & Pendelamplitude & Kommentar \\
+	\hline
+	$\ergebnis$ & $\ergebnis$ & \\
+	$\vdots$ & $\vdots$ & \\
+\end{tabular}
+
+\paragraph{schwache Dämpfung}
+
+Wir messen mit dem Dämpfungsstrom auf $\unit[0.3]A$.
+
+\begin{tabular}{ccccr}
+	Motorspannung [$\unit V$] & Pendelamplitude & Kommentar \\
+	\hline
+	$\ergebnis$ & $\ergebnis$ & \\
+	$\vdots$ & $\vdots$ & \\
+\end{tabular}
+
+Diese Daten werte ich in §\ref{e_auswertung} aus.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%                                 Auswertung                                  %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Auswertung}
+
+\subsection{Eigenfrequenz (Aufgabe 106.a)}
+\label{a_auswertung}
+
+In §\ref{a_durchführung} haben wir die Eigenfrequenz des Pendels einige Male
+gemessen. Daraus errechne ich die Eigenfrequenz $\omega_0$ aus den einzelnen
+Messwerten $x$:
+\[ \omega_0 = \overline x \]
+
+Die Standardabweichung gibt den statistischen Fehler für diese Messung:
+\[ \Delta \omega_0 = \frac{\sigma(x)}{\sqrt{N}} \]
+
+\subsection{Dämpfung (Aufgabe 106.c)}
+\label{c_auswertung}
+
+Die in §\ref{b_durchführung} gemessenen Amplituden sollen nun halblogarithmisch
+dargestellt werden. Dazu generiere ich für jede Messreihe $(x, y, \Delta y)$
+Tupel:
+\[ (x, y, \Delta y) := \left(n, \ln(\phi_n), \frac{\Delta \phi}{\phi_n}\right) \]
+
+Diese lasse ich mit Gnuplot plotten.
+
+\includegraphics[width=\textwidth]{plot_c.pdf}
+
+Die Geradensteigung errechne ich aus diesen Wertepaaren für jede Gerade jeweils
+mit:
+\[ \mathrm{Steigung} = -(\beta T) = \frac{K(x, y)}{V(x)} \]
+
+Dabei bezeichnet $K$ die Kovarianz und $V$ die Varianz.
+
+Den Fehler für jede Steigung bestimme ich über:
+\[ \Delta (-\beta T) = \frac{\sigma(\phi)}{N} \]
+
+Die drei Steigungen sind \fehlt
+
+Anschließend bestimme ich aus jeder Steigung das Dämpungsverhältnis $K$:
+\[ K = \exp(\beta T) \]
+
+Sowie den Fehler:
+\[ \Delta K = K \beta T \Delta (-\beta T) \]
+
+Die drei Dämpfungsverhältnisse sind \fehlt
+
+Außerdem bestimme ich die Güte $Q$:
+\[ Q = \frac{\pi}{\beta T} \]
+
+Und deren Fehler:
+\[ \Delta Q = \frac{\pi \Delta (-\beta T)}{(-\beta T)^2} \]
+
+Die drei Gütefaktoren sind \fehlt
+
+\subsection{Motorfrequenz (Aufgabe 106.d)}
+\label{d_auswertung}
+
+Hier werte ich die Daten aus §\ref{d_durchführung} aus. Auf der $x$-Achse ist
+die Motorspannung aufgetragen, auf der $y$-Achse die Rotationsfrequenz.
+
+Dabei errechnen sich die Datenpunkte wie folgt:
+\[ (x, y, \Delta y) := \left( U, \frac N T, \frac{N}{T^2} \Delta T \right) \]
+
+\includegraphics[width=\textwidth]{plot_d.pdf}
+
+Diese Messdaten fitte ich mit einem linearen Modell mit den Parametern $\eta$
+und $\zeta$:
+\[ \nu = \eta V + \zeta \]
+
+Die Geradensteigung kann ich mit der Formel $\eta = K(x, y)/V(x)$ errechnen.
+
+Für die Steigung erhalte ich:
+\[ \eta = \ergebnis \]
+
+Den Fehler bestimme ich mit:
+\[ \Delta \eta = \frac{\sigma (y)}{N} = \ergebnis \]
+
+Und für den $y$-Achsen-Abschnitt:
+\[ \zeta = \ergebnis \]
+
+Den Fehler bestimme ich mit:
+\[ \Delta \zeta = \overline{x^2} \Delta \eta = \ergebnis \]
+
+\subsection{Resonanz (Aufgabe 106.e)}
+\label{e_auswertung}
+
+Die Daten, die in §\ref{e_durchführung} gemessen worden sind, werte ich in
+diesem Abschnitt aus. Auch hier generiere ich, einmal für die starke, einmal
+für die schwache Dämpfung, Tupel zum Plotten:
+\[ (x, y, \Delta y) := \left( \eta U + \zeta, \phi_\mathrm{max}, \Delta \phi \right) \]
+
+\includegraphics[width=\textwidth]{plot_e.pdf}
+
+\subsection{Resonanz (Aufgabe 106.e)}
+
+Ich bestimme die die Güte $Q$ aus dem Abstand $\Delta \nu$ der beiden
+Frequenzen, für welche die Amplitude auf das $2^{-0.5}$-fache der
+Maximalamplitude herabgesunken ist und der Eigenfrequenz $\nu_0$, bei der die
+Maximalamplitude auftritt:
+\[ Q = \frac{\nu_0}{\Delta \nu} \]
+
+Dazu lese ich $\nu_0 = \ergebnis$ und $\Delta \nu = \ergebnis$ aus dem Diagram
+ab. Als Ergebnis erhalte ich $Q = \ergebnis$.
+
+Darüber hinaus bestimme ich die Güte $Q$ aus dem Verhältnis der Amplituden:
+\[ Q = \frac{\phi(\nu = \nu_0)}{\phi(\nu = 0)} = \ergebnis \]
+
+\section{Resultat}
+
+Vergleich der $Q$ \fehlt
+
+\section{Diskussion}
+
+\end{document}
