@@ -1,0 +1,58 @@
+% Copyright (c) 2012 Martin Ueding <dev@martin-ueding.de>
+%
+\documentclass[10pt,twocolumn]{article}
+\usepackage[T1]{fontenc}
+\usepackage[a4paper, left=1.5cm, right=1.5cm, top=1.5cm, bottom=1.5cm]{geometry}
+\usepackage[activate]{pdfcprot}
+\usepackage[ngerman]{babel}
+\usepackage[parfill]{parskip}
+\usepackage[scaled]{beramono}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{color}
+\usepackage{epstopdf}
+\usepackage{graphicx}
+\usepackage{hyperref}
+\usepackage{listings}
+\usepackage{setspace}
+\usepackage{units}
+
+\definecolor{darkblue}{rgb}{0,0,.5}
+\hypersetup{pdftex=true, colorlinks=true, breaklinks=false, linkcolor=black, menucolor=black, pagecolor=black, urlcolor=darkblue}
+\setlength{\columnsep}{2cm}
+
+\lstset{basicstyle=\small\ttfamily}
+
+\newcommand{\arcsinh}{\mathrm{arcsinh}}
+\newcommand{\asinh}{\mathrm{arcsinh}}
+\newcommand{\card}{\mathrm{card}}
+\newcommand{\diam}{\mathrm{diam}}
+\newcommand{\e}[1]{\cdot 10^{#1}}
+\newcommand{\fehlt}{\textcolor{red}{Hier fehlen noch Inhalte.}}
+\newcommand{\half}{\frac{1}{2}}
+\newcommand{\laplace}{\vnabla^2}
+\newcommand{\vnabla}{\vec{\nabla}}
+\renewcommand{\d}{\, \mathrm d}
+
+\title{Messergebnisse Version 130}
+\author{Martin Ueding \and Lino Lemmer}
+
+\begin{document}
+
+\maketitle
+
+\textbf{erster Versuch, Teil 1}
+
+\lstinputlisting{Ueding_Martin_Teil_1-1.tsv}
+
+\textbf{erster Versuch, Teil 2}
+
+\lstinputlisting{Ueding_Martin_Teil_1-2.tsv}
+
+\textbf{zweiter Versuch}
+
+\lstinputlisting{Ueding_Martin_Teil_2.tsv}
+
+\end{document}

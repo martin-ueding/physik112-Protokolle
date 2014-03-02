@@ -1,0 +1,16 @@
+# Created by Octave 3.2.4, Tue May 22 16:58:53 2012 CEST <mu@Martin-Eee>
+# name: laplace_plot_data
+# type: matrix
+# rows: 11
+# columns: 2
+ 275 2
+ 285 6
+ 295 23
+ 305 49
+ 315 65
+ 325 70
+ 335 45
+ 345 23
+ 355 10
+ 365 5
+ 375 2
