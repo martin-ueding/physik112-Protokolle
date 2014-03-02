@@ -1,0 +1,12 @@
+# Created by Octave 3.2.4, Tue May 15 17:53:04 2012 CEST <mu@Martin-Eee>
+# name: gfk_plot
+# type: matrix
+# rows: 7
+# columns: 3
+ 0 0.83 0.02
+ 49.05 0.89 0.02
+ 68.67 1.08 0.02
+ 69.651 1.17 0.02
+ 71.613 1.26 0.02
+ 73.575 1.5 0.02
+ 74.556 1.86 0.02
