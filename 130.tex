@@ -1,0 +1,227 @@
+% Copyright (c) 2012 Martin Ueding <dev@martin-ueding.de>
+%
+\documentclass[11pt]{article}
+\usepackage[T1]{fontenc}
+\usepackage[a4paper, left=3cm, right=2cm, top=2cm, bottom=2cm]{geometry}
+\usepackage[activate]{pdfcprot}
+\usepackage[ngerman]{babel}
+\usepackage[parfill]{parskip}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{color}
+\usepackage{epstopdf}
+\usepackage{graphicx}
+\usepackage{hyperref}
+\usepackage{setspace}
+\usepackage{units}
+
+\definecolor{darkblue}{rgb}{0,0,.5}
+\hypersetup{pdftex=true, colorlinks=true, breaklinks=false, linkcolor=black, menucolor=black, pagecolor=black, urlcolor=darkblue}
+\setlength{\columnsep}{2cm}
+
+\newcommand{\arcsinh}{\mathrm{arcsinh}}
+\newcommand{\asinh}{\mathrm{arcsinh}}
+\newcommand{\card}{\mathrm{card}}
+\newcommand{\diam}{\mathrm{diam}}
+\newcommand{\e}[1]{\cdot 10^{#1}}
+\newcommand{\fehlt}{\textcolor{red}{Hier fehlen noch Inhalte.}}
+\newcommand{\half}{\frac{1}{2}}
+\newcommand{\laplace}{\vnabla^2}
+\newcommand{\vnabla}{\vec{\nabla}}
+\renewcommand{\d}{\, \mathrm d}
+
+\title{physik112 \\ Versuch 130 -- statistische Schwankungen}
+\author{Martin Ueding}
+
+\begin{document}
+
+\maketitle
+
+\tableofcontents
+
+\newpage
+
+\section{Einleitung}
+
+In diesem Versuch wollen wir die verschiedenen Wahrscheinlichkeitsverteilungen
+untersuchen. Als Quelle für zufällige Ereignisse benutzen wir den radioaktiven
+Zerfall.
+
+\section{Theorie}
+
+Der radioaktive Zerfall ist letztlich ein Bernoulliprozess, es gibt zwei Möglichkeiten (Detektion oder nicht) für jedes Atom. Die Entscheidungen der Atome sind dabei unabhängig. Dies kann mit der Biominalverteilung modelliert werden:
+\[ P_\mathrm{B} (k; p, n) = \binom nk p^k (1-p)^{n-k} \]
+
+Diese Verteilung können wir mit verschiedenen, einfacheren Verteilungen
+annähern. Für den Fall, dass die Einzelwahrscheinlichkeit gering ist und wir
+eine recht große Anzahl Messungen vornehmen, können wir dies durch die
+Poissonverteilung annähern. Diese hängt nur noch vom Mittelwert $\mu = np$ ab:
+\[ P_\mathrm{P} (k; \mu) = \frac{\mu^k}{k!} \exp(-\mu) \]
+
+Falls der Mittelwert groß ist, kann diese auch durch eine Laplaceverteilung angenähert werden:
+\[ P_\mathrm{L} (k) = \frac 1{\sqrt{2 \pi \langle k \rangle}} \exp\left(-\frac{(k-\langle k \rangle)^2}{2 \langle k \rangle} \right) \]
+
+Wir messen den Zerfall des $^{137}Cs$-Nuklids. Dieses hat eine Halbwertszeit von $T_\half = \unit[30]a$ und eine Aktivität von $A = \unit[185 \e 6]{Bq}$. Beim Zerfall von Cäsium entsteht meistens Barium, das mit seiner kurzen Halbwertszeit von $\unit[153]s$ schnell zerfällt und Gammastrahlung aussendet.
+
+\section{Aufgaben}
+
+\subsection{Aufgabe A: Wahrscheinlichkeiten}
+
+\subsubsection{Sonntagskind}
+
+Hier muss die Binominalverteilung benutzt werden. Dabei ist $p = \frac 17$.
+\[ P(k) = B(k, p, n) = p^k(1-p)^{n-k} \binom nk = \left( \frac 17 \right)^k \left( \frac 67 \right)^{n-k} \binom nk \]
+
+\subsubsection{Münze}
+
+Auch hier ist wieder die Binominalverteilung zu verwenden. Dabei ist $p = \half$.
+\[ P = B(k, p, n) = \left(\half\right)^n \binom nk \]
+
+\subsubsection{Gasvolumen}
+
+Die Moleküle verteilen sich im Mittel homogen, somit gilt:
+\[ \mu = \langle k \rangle = np \]
+
+Die Streuung ist gegeben durch:
+\[ \sigma = \sqrt{\mu (1-p)} \]
+
+Die relative Schwankung ist:
+\[ \frac \sigma \mu = \sqrt{\frac{1-p}\mu} \]
+
+\subsubsection{Detektor}
+
+Damit einer der $n$ Detektoren das Teilchen zu $0.999$ detektiert, muss die Wahrscheinlichkeit, dass alle das Teilchen verpassen unter $0.001$ liegen:
+\[ 0.05^n \leq 0.001 \]
+
+$n$ ist also $3$.
+
+Damit von $n$ mindestens zwei ansprechen, müssen die Fälle, in denen keiner und nur einer anspricht ausgeschlossen werden. Dass kein Detektor anspricht ist $0.05^n$. Dass einer anspricht ist $n \cdot 0.05^{n-1} \cdot 0.95$. Somit muss gelten:
+\[ 1 - \left( 0.05^n + n \cdot 0.05^{n-1} \cdot 0.95 \right) \geq 0.999 \]
+
+Dann ist $n \geq 4$.
+
+\subsection{Aufgabe B: Tabelle}
+
+\begin{tabular}{l|lll}
+	Verteilung & Mittelwert & Streuung & Gültigkeit \\
+	\hline
+	Binomial & $\left\langle k \right\rangle = np$ & $\sigma = \sqrt{n p (1-p)}$ & immer \\
+	 Poisson & $\mu = np$ & $\sigma = \sqrt{\mu}$ & $n \gg 1$, $p \ll 1$ \\
+		  Gauss & $\mu = np$ & $\sigma = \sqrt{\mu(1-p)}$ & $n \gg 1$, $\sqrt{np(1-p)} \gg 1$ \\
+	 Laplace & $\mu = np$ & $\sigma = \sqrt{\mu}$ & $n \gg 1$, $\mu \gg 1$, $p \ll 1$ \\
+\end{tabular}
+
+\subsection{Aufgabe C: Ansprechwahrscheinlichkeit}
+
+Die Ansprechwahrscheinlichkeit hängt ab von:
+%
+\begin{itemize}
+	\item Hochspannung
+	\item Abstand zur Probe
+	\item Größe des Fensters
+	\item Druck des Gases
+	\item Empfindlichkeit des Verstärkers
+\end{itemize}
+
+\subsection{Aufgabe D: Sekundärelektronen}
+
+Dieses Problem lässt sich mit einer Poissonverteilung modellieren. Dabei ist $\mu = 2.7$. Gefragt ist nach $P(k=0)$:
+\[ P(k = 0) = \exp(-\mu) = 0.067206 \]
+
+In 6.7\% der Fälle wird das Teilchen nicht registriert.
+
+\section{Aufbau}
+
+Wir haben einen computergesteuerten Geiger-Müller-Zähler und eine Cäsiumprobe in einem Bleiblock. Die Öffnung kann mit einem Absorber verschlossen werden.
+
+\textcolor{blue}{Skizze einfügen}
+
+\section{Durchführung}
+\subsection{Poissonverteilung}
+\label{durchführung-poisson}
+
+Wir messen $N$-mal ($N \geq 300$) die Zahl $k$ der radioaktiven Zerfälle, die in einer festgesetzen Zeit $T$ vom Detektor aufgenommen werden.
+
+\begin{tabular}{cc}
+	Anzahl Zerfälle & Häufigkeit \\
+	\hline
+	0 & \textcolor{blue}{Messwert} \\
+	1 & \textcolor{blue}{Messwert} \\
+	2 & \textcolor{blue}{Messwert} \\
+	3 & \textcolor{blue}{Messwert} \\
+	4 & \textcolor{blue}{Messwert} \\
+	5 & \textcolor{blue}{Messwert} \\
+		 \vdots & \vdots \\
+\end{tabular}
+
+\subsection{Laplaceverteilung}
+\label{durchführung-laplace}
+
+Wieder führen wir 300 Messungen durch. Dabei besteht eine Messung aus der
+Anzahl Zerfälle in einer Periode $T_2$. Diese wählen wir so, dass im Mittel 300
+Impulse gezählt werden.
+
+\begin{tabular}{cc}
+	Anzahl Zerfälle & Häufigkeit \\
+	\hline
+	260 – 269 & \textcolor{blue}{Messwert} \\
+	270 – 279 & \textcolor{blue}{Messwert} \\
+	280 – 289 & \textcolor{blue}{Messwert} \\
+	   \vdots & \vdots
+\end{tabular}
+
+\section{Auswertung}
+
+\subsection{Poissonverteilung}
+
+Ich trage die in \ref{durchführung-poisson} gemessenen Werte in ein Histogram ein.
+
+Dann berechne ich den Schätzer für den Mittelwert:
+\[ \hat \mu = \frac 1N \sum_{i=0}^N k_i = \sum_{k_0}^{k_\mathrm{max}} k \frac{n_k}{N} \]
+
+Aus der Fehlerfortplanzungsformel ergibt sich der Fehler für den Mittelwert:
+\[ \Delta \hat \mu = \sqrt{\frac{\hat \mu}N} \]
+
+Die erwarteten Zählergebnisse bestimme ich aus der Poissonverteilung:
+\[ P_\mathrm{P}(k;\mu) = \frac{\mu^k}{k!} \exp(-\mu) \]
+
+Daraus bestimme ich dann wieder die erwarteten Säulenhöhen:
+\[ \left\langle n_k \right\rangle = N P(k) \]
+
+Außerdem bestimme ich die Schwankungsbreiten:
+\[ \Delta n_k = \sqrt{\left\langle n_k \right\rangle \left( 1 - \frac{\left\langle n_k \right\rangle}N \right)} \]
+
+Diese Schwankungsbreiten trage ich als „Fehlerbalken“ in das Histogramm ein.
+
+\includegraphics[width=\textwidth]{poisson.pdf}
+
+\subsection{Laplaceverteilung}
+
+Ich beginne damit, einen Schätzer für den Mittelwert zu bestimmen:
+\[ \hat \mu = \frac 1N \sum_{k=k_\mathrm{min};10}^\infty (k+5) n_k \]
+
+Die Streuung ist ebenfalls:
+\[ \Delta \hat \mu = \sqrt{\frac{\hat \mu}N} \]
+
+Die Wahrscheinlichkeiten bestimme ich mit:
+\[ P_\mathrm{L}(k) = \frac 1{\sqrt{2 \pi \mu}} \exp\left(-\frac{(k-\mu)^2}{2\mu} \right) \]
+
+Daraus bestimme ich die erwarteten Säulenhöhen:
+\[ \left\langle s_k \right\rangle \approx 10 N P(k+5) \]
+
+Sowie die erwarteten Schwankungen:
+\[ \Delta s_k = \sqrt{\left\langle s_k \right\rangle \left( 1 - \frac{\left\langle s_k \right\rangle}N \right)} \]
+
+\includegraphics[width=\textwidth]{laplace.pdf}
+
+\section{Resultat}
+
+\fehlt
+
+\section{Diskussion}
+
+\fehlt
+
+\end{document}
